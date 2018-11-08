@@ -8,9 +8,11 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { AccountPopOverComponent } from './account-pop-over/account-pop-over.component';
+import { FitnessClassMenuComponent } from './fitness-class-menu/fitness-class-menu.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, AccountPopOverComponent, FitnessClassMenuComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [

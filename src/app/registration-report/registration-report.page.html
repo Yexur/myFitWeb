@@ -1,0 +1,84 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Registration Report</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-list class="padding">
+        <ion-item>
+            <ion-label>From:</ion-label>
+            <ion-datetime displayFormat="DD MMM DDD, YYYY" max="2100" [(ngModel)]="fromDate"></ion-datetime>
+        </ion-item>
+        <ion-item>
+            <ion-label>To:</ion-label>
+            <ion-datetime displayFormat="DD MMM DDD, YYYY" max="2100" [(ngModel)]="toDate"></ion-datetime>
+        </ion-item>
+        <ion-item>
+            <button ion-button item-end (click)="search()">Search</button>
+            <button ion-button item-end (click)="clearSearch()">Clear</button>
+        </ion-item>
+    </ion-list>
+
+    <ion-grid *ngIf="(registrations | async)?.length==0">
+        <ion-row class="noData">
+            <ion-col>
+                <h1>No registrations available</h1>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+        <ion-row>
+            <ion-col *ngFor="let registration of registrations | async" col-12 col-md-6 col-lg-6>
+                <ion-card>
+                    <ion-card-header color='secondaryDark'>
+                        {{ registration.fitnessClassName }}
+                    </ion-card-header>
+                    <ion-card-content>
+                        <ion-list>
+                            <ion-item>
+                                <ion-label>
+                                    <p>Date: {{ registration.dateOfClass | date }}</p>
+                                </ion-label>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label>
+                                    <p>Start time: {{ registration.startTime }} to {{ registration.endTime }}</p>
+                                </ion-label>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label>
+                                    <p>Instructor: {{ registration.instructor }}</p>
+                                </ion-label>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label>
+                                    <p>Location: {{ registration.location }}</p>
+                                </ion-label>
+                            </ion-item>
+                            <ion-item *ngIf="registration.dateOfClass <= currentDate">
+                                <ion-label>Attended</ion-label>
+                                <ion-checkbox (click)="updateAttended(registration)"
+                                    checked={{registration.attended}}
+                                    [(ngModel)]="registration.attended">
+                                </ion-checkbox>
+                            </ion-item>
+                        </ion-list>
+                    </ion-card-content>
+                    <ion-item color='secondaryDark'>
+                        <button ion-button icon-left clear item-end
+                            (click)="cancel(registration)"
+                            *ngIf="registration.dateOfClass >= currentDate">
+                            <ion-icon name="trash"></ion-icon>
+                            Cancel Registration
+                        </button>
+                    </ion-item>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

@@ -1,9 +1,16 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>attendees-list</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="primary">
+        <ion-title>Attendees</ion-title>
+        <ion-buttons end>
+            <button ion-button clear icon-only (click)="closeModal()">
+                <ion-icon color="grey" name="md-close"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-
+    <ion-row>
+        <ion-item *ngFor="let person of people | async">{{ person.displayName }}</ion-item>
+    </ion-row>
 </ion-content>

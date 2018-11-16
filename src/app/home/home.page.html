@@ -1,12 +1,52 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-toolbar>
+    <ion-navbar color="primary">
+        <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title></ion-title>
+    </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs">docs</a> will be your guide.</p>
+<ion-content>
+    <ion-grid *ngIf="(announcements | async)?.length==0">
+        <ion-row class="noData">
+            <ion-col>
+                <h1>No Announcements have been posted</h1>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+        <ion-row>
+            <ion-col *ngFor="let announcement of announcements | async" col-12 col-md-6 col-lg-6>
+                <ion-card>
+                    <ion-card-header>
+                        <p>{{announcement.created | date}}</p>
+                        <h1>{{ announcement.title }}</h1>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <p>{{ announcement.comment }}</p>
+                    </ion-card-content>
+                    <ion-item>
+
+                        <button ion-button icon-left clear item-end color="secondary"
+                            (click)="delete(announcement)" *ngIf="isAdmin">
+                            <ion-icon name="trash"></ion-icon>
+                            Delete
+                        </button>
+                        <button ion-button icon-left clear item-end color="secondary"
+                            (click)="openEditModal(announcement)" *ngIf="isAdmin">
+                            <ion-icon name="cog"></ion-icon>
+                            Edit
+                        </button>
+                    </ion-item>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-fab right bottom *ngIf="isAdmin">
+        <button ion-fab mini (click)="openAddModal()" color='secondary'>
+            <ion-icon name="add"></ion-icon>
+        </button>
+    </ion-fab>
 </ion-content>

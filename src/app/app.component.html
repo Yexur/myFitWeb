@@ -1,3 +1,75 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+    <ion-split-pane>
+        <ion-menu id="{{ adminId }}" side="left" [content]="content">
+            <ion-header>
+                <ion-toolbar color="primary">
+                    <ion-title>MyFit</ion-title>
+                </ion-toolbar>
+            </ion-header>
+
+            <ion-content>
+                <ion-list>
+                    <ion-item>
+                        <button ion-button clear (click)="presentAccountPopover($event)">
+                            <span class='userInfoText'ion-text color='textOnPrimary'>
+                                Account: {{ authService.user.value?.displayName }}
+                            </span>
+                        </button>
+                    </ion-item>
+                    <ion-item>
+                        <button menuClose ion-item *ngFor="let adminPage of adminPages"
+                            (click)="openPage(adminPage.component)">
+                            <ion-icon class="sideMenuIcon" name="{{adminPage.icon}}"></ion-icon>
+                            {{adminPage.title}}
+                        </button>
+                    </ion-item>
+                </ion-list>
+            </ion-content>
+            <ion-footer>
+                <ion-toolbar color='headerGrey'>
+                    <button ion-item (click)="signOut()" color='headerGrey'>
+                        <ion-icon name="power" class="sideMenuIcon"></ion-icon>
+                        Logout
+                    </button>
+                </ion-toolbar>
+            </ion-footer>
+        </ion-menu>
+
+        <ion-menu id="{{ nonAdminId }}" side="left" [content]="content">
+            <ion-header>
+                <ion-toolbar color="primary">
+                    <ion-title>Menu</ion-title>
+                </ion-toolbar>
+            </ion-header>
+
+            <ion-content>
+                <ion-list>
+                    <ion-item>
+                        <button ion-button clear (click)="presentAccountPopover($event)">
+                            <span class='userInfoText'ion-text color='textOnPrimary'>
+                                Account: {{ authService.user.value?.displayName }}
+                            </span>
+                        </button>
+                    </ion-item>
+                    <ion-item>
+                        <button menuClose ion-item *ngFor="let nonAdminPage of nonAdminPages"
+                            (click)="openPage(nonAdminPage.component)">
+                            <ion-icon class="sideMenuIcon" name="{{nonAdminPage.icon}}"></ion-icon>
+                            {{nonAdminPage.title}}
+                        </button>
+                    </ion-item>
+                </ion-list>
+            </ion-content>
+
+            <ion-footer>
+                <ion-toolbar color='headerGrey'>
+                    <button ion-item (click)="signOut()" color='headerGrey'>
+                        <ion-icon name="power" class="sideMenuIcon"></ion-icon>
+                        Logout
+                    </button>
+                </ion-toolbar>
+            </ion-footer>
+        </ion-menu>
+    </ion-split-pane>
+    <ion-router-outlet></ion-router-outlet>
 </ion-app>

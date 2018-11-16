@@ -1,9 +1,34 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>fitness-class-registration</ion-title>
-  </ion-toolbar>
+    <ion-navbar color="primary">
+        <ion-title>Fitness Class Registrations</ion-title>
+    </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-
+<ion-content>
+    <ion-card>
+        <ion-card-header color='secondaryDark'>
+            {{ fitnessClassTitle }}
+        </ion-card-header>
+        <ion-card-content>
+            <ion-item>
+                <ion-label>
+                    <h2>Date of Class: {{ fitnessClassDate | date }}</h2>
+                </ion-label>
+            </ion-item>
+            <ion-list *ngFor="let fitnessClassesRegistration of fitnessClassesRegistrations | async">
+                <ion-item *ngIf="fitnessClassDate <= currentDate">
+                    <ion-checkbox (click)="updateAttended(fitnessClassesRegistration)"
+                        checked={{fitnessClassesRegistration.attended}}
+                        [(ngModel)]="fitnessClassesRegistration.attended">
+                    </ion-checkbox>
+                    <ion-label>
+                        <p>Name: {{ fitnessClassesRegistration.displayName }}</p>
+                    </ion-label>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+        <ion-item color='secondaryDark'>
+            <p>Total Registrations: {{ (fitnessClassesRegistrations | async)?.length }}</p>
+        </ion-item>
+    </ion-card>
 </ion-content>

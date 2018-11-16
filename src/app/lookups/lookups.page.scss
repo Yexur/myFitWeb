@@ -1,0 +1,5 @@
+.inactive {
+    color: map-get($colors, greyInactive);
+    opacity: .4;
+    pointer-events: none;
+}

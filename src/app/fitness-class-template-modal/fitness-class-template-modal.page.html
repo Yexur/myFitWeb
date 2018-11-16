@@ -1,9 +1,119 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>fitness-class-template-modal</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="primary">
+        <ion-title>{{ fitnessClassTemplateTitle }}</ion-title>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+    <ion-content padding>
+        <ion-list>
+            <form [formGroup]='fitnessClassTemplateForm'>
+                <ion-item>
+                    <ion-label stacked>Fitness Class</ion-label>
+                    <ion-input type="text"
+                        formControlName="fitnessClassName"
+                        placeholder="Please Select a Fitness Class">
+                        {{ fitnessClassTemplate.fitnessClassName }}
+                    </ion-input>
+                </ion-item>
+                <ion-item *ngIf="!fitnessClassTemplateForm.controls.fitnessClassName.valid &&
+                    (fitnessClassTemplateForm.controls.fitnessClassName.dirty || submitAttempt)">
+                    <p>Please enter a valid fitness class name.</p>
+                </ion-item>
 
-</ion-content>
+                <ion-item>
+                    <ion-label stacked>Instructor</ion-label>
+                    <ion-select interface="popover"
+                        formControlName="instructor"
+                        placeholder="Please Select an Instructor">
+                        <ion-option *ngFor="let instructor of instructors | async"
+                            value="{{ instructor.instructorFirstName }} {{ instructor.instructorLastName }}">
+                            {{ instructor.instructorFirstName }} {{ instructor.instructorLastName }}
+                        </ion-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item *ngIf="!fitnessClassTemplateForm.controls.instructor.valid &&
+                    (fitnessClassTemplateForm.controls.instructor.dirty || submitAttempt)">
+                    <p>Please enter a valid instructor.</p>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label stacked>Location</ion-label>
+                    <ion-select interface="popover"
+                        formControlName="location"
+                        placeholder="Please Select a Location">
+                        <ion-option *ngFor="let location of locations | async"
+                            value="{{ location.locationName }}">
+                            {{ location.locationName }}
+                        </ion-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item *ngIf="!fitnessClassTemplateForm.controls.location.valid &&
+                    (fitnessClassTemplateForm.controls.location.dirty || submitAttempt)">
+                    <p>Please enter a valid location.</p>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label>Start Time</ion-label>
+                    <ion-datetime
+                        formControlName="startTime"
+                        displayFormat="h:mm A"
+                        placeholder="{{ fitnessClassTemplate.startTime }}"
+                        minuteValues="0,15,30,45">
+                    </ion-datetime>
+                </ion-item>
+                <ion-item *ngIf="!fitnessClassTemplateForm.controls.startTime.valid &&
+                    (fitnessClassTemplateForm.controls.startTime.dirty || submitAttempt)">
+                    <p>Please enter a valid start time.</p>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label>End Time</ion-label>
+                    <ion-datetime
+                        formControlName="endTime"
+                        displayFormat="h:mm A"
+                        placeholder="{{ fitnessClassTemplate.endTime }}"
+                        minuteValues="0,15,30,45">
+                    </ion-datetime>
+                </ion-item>
+                <ion-item *ngIf="!fitnessClassTemplateForm.controls.endTime.valid &&
+                    (fitnessClassTemplateForm.controls.endTime.dirty || submitAttempt)">
+                    <p>Please enter a valid end time.</p>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label floating>Capacity</ion-label>
+                    <ion-input
+                        type="number"
+                        formControlName="capacity">
+                        {{ fitnessClassTemplate.capacity }}
+                    </ion-input>
+                </ion-item>
+                <ion-item *ngIf="!fitnessClassTemplateForm.controls.capacity.valid &&
+                    (fitnessClassTemplateForm.controls.capacity.dirty || submitAttempt)">
+                    <p>Please enter a valid capacity.</p>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label floating>Description</ion-label>
+                    <ion-textarea
+                        formControlName="description"
+                        rows="10" type="textarea" autocomplete="true">
+                    </ion-textarea> {{ fitnessClassTemplate.description }}
+                </ion-item>
+                <ion-item *ngIf="!fitnessClassTemplateForm.controls.description.valid &&
+                    (fitnessClassTemplateForm.controls.description.dirty || submitAttempt)">
+                    <p>Please enter a valid description.</p>
+                </ion-item>
+            </form>
+            <ion-item>
+                <ion-buttons start>
+                    <button ion-button (click)="dismiss()">
+                        <span ion-text color='textOnPrimary'>Cancel</span>
+                    </button>
+                    <button ion-button (click)="save()" [disabled]="!fitnessClassTemplateForm.valid">
+                        <span ion-text color='textOnPrimary'>Save</span>
+                    </button>
+                </ion-buttons>
+            </ion-item>
+        </ion-list>
+    </ion-content>

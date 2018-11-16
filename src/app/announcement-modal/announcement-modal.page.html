@@ -1,9 +1,49 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>announcement-modal</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="primary">
+        <ion-title>{{ title }}</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+    <ion-list>
+        <form [formGroup]='announcementForm'>
+            <ion-item>
+                <ion-label floating>Title</ion-label>
+                <ion-input
+                    formControlName="announcementTitle"
+                    type="text" clearInput autocomplete="true">
+                        {{ announcement.title }}
+                </ion-input>
+            </ion-item>
 
+            <ion-item *ngIf="!announcementForm.controls.announcementTitle.valid  &&
+                (announcementForm.controls.announcementTitle.dirty || submitAttempt)">
+                <p>Please enter a valid title.</p>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>Comment</ion-label>
+                <ion-textarea
+                    formControlName="announcementComment"
+                    rows="10" type="textarea" autocomplete="true">
+                        {{ announcement.comment }}
+                </ion-textarea>
+            </ion-item>
+
+            <ion-item *ngIf="!announcementForm.controls.announcementComment.valid  &&
+                (announcementForm.controls.announcementComment.dirty || submitAttempt)">
+                <p>Please enter a valid comment.</p>
+            </ion-item>
+        </form>
+        <ion-item>
+            <ion-buttons start>
+                <button ion-button (click)="dismiss()">
+                    <span ion-text color='textOnPrimary'>Cancel</span>
+                </button>
+                <button ion-button (click)="save()" [disabled]="!announcementForm.valid">
+                    <span ion-text color='textOnPrimary'>Save</span>
+                </button>
+            </ion-buttons>
+        </ion-item>
+    </ion-list>
 </ion-content>

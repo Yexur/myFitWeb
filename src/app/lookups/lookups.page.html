@@ -1,9 +1,50 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>lookups</ion-title>
-  </ion-toolbar>
+    <ion-navbar color="primary">
+        <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+        </button>
+    </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
+    <ion-list>
+        <ion-list-header  color='greyInactive'>
+                Fitness Class Templates
+                <ion-icon name="document"></ion-icon>
+        </ion-list-header>
+        <button ion-item *ngFor="let fitnessClassTemplate of fitnessClassTemplates | async"
+            (click)="openEditFitnessClassTemplateModal(fitnessClassTemplate)">
+            {{ fitnessClassTemplate.fitnessClassName }}
+        </button>
 
+        <ion-list-header color='greyInactive'>
+            Instructors
+            <ion-icon name="person"></ion-icon>
+        </ion-list-header>
+        <ion-item *ngFor="let instructor of instructors | async">
+            {{ instructor.instructorLastName }}, {{ instructor.instructorFirstName }}
+        </ion-item>
+
+        <ion-list-header color='greyInactive'>
+            Locations
+            <ion-icon name="compass"></ion-icon>
+        </ion-list-header>
+        <ion-item *ngFor="let location of locations | async">
+            {{ location.locationName }}
+        </ion-item>
+    </ion-list>
+    <ion-fab bottom right>
+        <button ion-fab mini color='secondary'><ion-icon name="add"></ion-icon></button>
+        <ion-fab-list side="top">
+            <button color='greyInactive' ion-fab (click)="openAddFitnessClassTemplateModal()">
+                <ion-icon name="document"></ion-icon>
+            </button>
+            <button color='greyInactive' ion-fab (click)="openAddInstructorModal()">
+                <ion-icon name="person"></ion-icon>
+            </button>
+            <button color='greyInactive' ion-fab (click)="openAddLocationModal()">
+                <ion-icon name="compass"></ion-icon>
+            </button>
+        </ion-fab-list>
+    </ion-fab>
 </ion-content>

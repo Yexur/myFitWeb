@@ -22,6 +22,7 @@ const routes: Routes = [
   { path: 'registration', loadChildren: './registration/registration.module#RegistrationPageModule' },
   { path: 'reset-password', loadChildren: './reset-password/reset-password.module#ResetPasswordPageModule' },
   { path: 'sign-up', loadChildren: './sign-up/sign-up.module#SignUpPageModule' },
+  { path: 'registration-report', loadChildren: './registration-report/registration-report.module#RegistrationReportPageModule' },
 ];
 
 @NgModule({

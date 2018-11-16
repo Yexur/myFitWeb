@@ -1,0 +1,87 @@
+.date-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    padding-left: 2rem;
+}
+
+.date-input {
+    width: 30%;
+    font-size: 1.5rem;
+}
+
+.inline {
+    display: inline-block;
+}
+
+.date-range-header {
+    padding: 2rem;
+    background-color: map-get($colors, headerGrey);
+    font-size: 1.7rem;
+}
+
+.row {
+    display: white;
+}
+
+.attendee-row {
+    .item-md.item-block {
+        min-height: 25px;
+        .item-inner {
+            border: 0;
+            min-height: 25px;
+            height: min-content;
+        }
+    }
+    .label {
+        margin: 0;
+    }
+    .button {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+}
+
+.class-row {
+    display: inline;
+    background-color: white;
+}
+
+.class-name {
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.class-date {
+    color: map-get($colors, grey);
+    font-size: 1.5rem;
+    margin-top: 0;
+}
+
+
+.display-name {
+    font-size: 1.5rem;
+}
+
+.attendee-row:nth-child(even), .attendee-row:nth-child(even) .item{
+    background: map-get($colors, greyTableRow);
+}
+
+.attendee-row:nth-child(odd), .attendee-row:nth-child(odd) .item {
+    background: map-get($colors, white);
+}
+
+button[ion-button].not-attending-confirmed.button, button[ion-button].attending-confirmed.button {
+    background-color: map-get($colors, white);
+    outline: map-get($colors, secondary);
+    border: 3px solid map-get($colors, secondary);
+    color: map-get($colors, secondary);
+    padding: 5px;
+}
+
+button[ion-button].not-attending-attended, button[ion-button].attending-not {
+    background: map-get($colors, white);
+    outline: none;
+    border: none;
+    color: map-get($colors, greyInactive);
+}

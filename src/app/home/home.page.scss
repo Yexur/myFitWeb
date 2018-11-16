@@ -1,1 +1,7 @@
+.card-md h1{
+    font-weight: bold;
+}
 
+.card-md p{
+    color: map-get($colors, grey);
+}

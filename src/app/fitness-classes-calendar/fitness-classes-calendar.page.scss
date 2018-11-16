@@ -1,0 +1,59 @@
+.calendar-title {
+    height: 100%;
+
+    .toolbar-title {
+        height: inherit;
+        align-content: center;
+        display: grid;
+    }
+}
+
+.calendar {
+    .monthview-datetable {
+        background-color: map-get($colors, white);
+
+        thead {
+            text-transform: uppercase;
+        }
+    }
+}
+
+.fitness-class-card {
+    ion-card-header {
+        ion-item.item-block {
+            min-height: 2.2rem;
+
+            > .item-inner {
+                padding-right: 0;
+            }
+        }
+        ion-label {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        h1 {
+            font-weight: bold;
+        }
+
+        .cancelled {
+            color: $danger;
+        }
+
+        .header-more[clear] {
+            margin: 0;
+            height: 20px;
+        }
+    }
+
+    ion-card-content ion-label {
+        &:first-of-type {
+            margin-top: 0;
+        }
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+
+        p { color: map-get($colors, grey); }
+    }
+}

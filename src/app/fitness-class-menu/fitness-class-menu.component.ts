@@ -22,7 +22,7 @@ export class FitnessClassMenuComponent implements OnInit {
         public loadingService: LoadingService,
         public fitnessClassService: FitnessClassService
     ) {
-        this.fitnessClass = navParams.data;
+        this.fitnessClass = navParams.get('fitnessClass');
     }
 
     ngOnInit() {
@@ -31,7 +31,7 @@ export class FitnessClassMenuComponent implements OnInit {
     async menuEdit() {
         const modal = await this.modalCtrl.create({
             component: FitnessClassModalPage,
-            componentProps: { this.fitnessClass },
+            componentProps: { fitnessClass: this.fitnessClass },
             cssClass: 'largeModal'
         });
 
@@ -62,7 +62,7 @@ export class FitnessClassMenuComponent implements OnInit {
         );
     }
 
-    private showAlert(title, subTitle, action: (fClass: FitnessClassModel) => {}) {
+    private async showAlert(title, subTitle, action: (fClass: FitnessClassModel) => {}) {
         let alert = await this.alertCtrl.create({
             header: title,
             subHeader: subTitle,

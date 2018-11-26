@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import
-{   NavParams,
-    PopoverController,
-    ModalController,
-    AlertController,
-    NavController
-} from '@ionic/angular';
+import { Router } from '@angular/router';
+import { ModalController, AlertController } from '@ionic/angular';
 import { FitnessClassModalPage } from '../fitness-class-modal/fitness-class-modal.page';
 import { FitnessClassService, RegistrationService } from '../api.services/export.api';
 import { FitnessClassModel } from '../models/export.models';
@@ -27,15 +22,13 @@ export class FitnessClassPage implements OnInit {
     public currentDate: Date = DateUtils.getCurrentDate();
 
     constructor(
-        public navParams: NavParams,
-        public popoverCtrl: PopoverController,
         private fitnessClassService: FitnessClassService,
         private registrationService: RegistrationService,
         private authService: AuthService,
         private loadingService: LoadingService,
         private modalCtrl: ModalController,
         private alertCtrl: AlertController,
-        public navCtrl: NavController
+        private router: Router
     ) {
     }
 
@@ -43,10 +36,6 @@ export class FitnessClassPage implements OnInit {
     }
 
     //TODO:  THIS PAGE WILL BE REMOVED WHEN ALL OF THE FUNCTIONALITY HAS BEEN REMOVED
-
-    ionViewCanEnter(): boolean {
-        return this.authService.isAuthenticated();
-    }
 
     async ionViewDidLoad() {
         this.isAdmin = this.authService.isAdmin();
@@ -86,7 +75,9 @@ export class FitnessClassPage implements OnInit {
     async openEditModal(fitnessClass: FitnessClassModel) {
         const modal = await this.modalCtrl.create({
             component: FitnessClassModalPage,
-            componentProps: { fitnessClass },
+            componentProps: {
+                fitnessClass: fitnessClass
+            },
             cssClass: 'largeModal'
         });
        await modal.present();
@@ -128,7 +119,7 @@ export class FitnessClassPage implements OnInit {
     }
 
     openRegistrationList(fitnessClass: FitnessClassModel){
-        this.navCtrl.push('FitnessClassRegistrationPage', fitnessClass);  //use routers
+        this.router.navigateByUrl('/fitness-class-registration/' + fitnessClass.id);
     }
 
     toggleShowCancelled() {

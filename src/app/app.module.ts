@@ -14,7 +14,6 @@ import { FIREBASE_CONFIG } from './app.config/app.firebase.config';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { HomePage } from './home/home.page';
 
 import {
     AnnouncementService,
@@ -29,15 +28,13 @@ import {
 
 import { ToastService, AuthService, LoadingService } from "./app.services/export.app.servies";
 //import { NgCalendarModule } from 'ionic2-calendar'; this needs to be replaced
-import { FitnessClassesCalendarPage } from './fitness-classes-calendar/fitness-classes-calendar.page';
 
 @NgModule({
     declarations: [
         AppComponent,
         AccountPopOverComponent,
-        FitnessClassMenuComponent,
-        FitnessClassesCalendarPage,
-        HomePage],
+        FitnessClassMenuComponent
+    ],
     entryComponents: [],
     imports: [
         BrowserModule,

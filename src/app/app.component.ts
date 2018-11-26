@@ -3,10 +3,9 @@ import { Platform, MenuController, Events, PopoverController} from '@ionic/angul
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
-import { ToastService, AuthService } from "./app.services/export.app.servies";
+import { AuthService } from "./app.services/export.app.servies";
 import { AccountPopOverComponent } from './account-pop-over/account-pop-over.component';
-import { HomePage } from './home/home.page';
-import { FitnessClassesCalendarPage } from './fitness-classes-calendar/fitness-classes-calendar.page';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -21,7 +20,6 @@ export class AppComponent {
     public nonAdminId = "nonAdmin";
     public adminId = "admin";
 
-
     constructor(
         public platform: Platform,
         public statusBar: StatusBar,
@@ -30,7 +28,7 @@ export class AppComponent {
         public popoverCtrl: PopoverController,
         public authService: AuthService,
         private menuCtrl: MenuController,
-        private toastService: ToastService
+        private router: Router
     )
     {
         events.subscribe('user:Login', () => {
@@ -42,29 +40,29 @@ export class AppComponent {
                 this.menuCtrl.enable(true, this.nonAdminId);
             }
 
-            this.openPage(HomePage);
+            this.openPage('/home');
         });
 
         events.subscribe('user:LogOut', () => {
             this.menuCtrl.enable(false, this.adminId);
             this.menuCtrl.enable(false, this.nonAdminId);
-            this.openPage('LoginPage');
+            this.openPage('/login');
         });
 
         this.initializeApp();
 
         this.adminPages = [
-            { title: 'Home', component: HomePage, icon: 'home' },
-            { title: 'Calendar', component: FitnessClassesCalendarPage, icon: 'calendar' },
-            { title: 'My Classes', component: 'RegistrationPage', icon: 'star' },
-            { title: 'Manage Attendees', component: 'ManageAttendeesPage', icon: 'people' },
-            { title: 'Setup', component: 'LookupsPage', icon: 'cog' }
+            { title: 'Home', component: '/home', icon: 'home' },
+            { title: 'Calendar', component: '/fitness-classes-calendar', icon: 'calendar' },
+            { title: 'My Classes', component: '/registration', icon: 'star' },
+            { title: 'Manage Attendees', component: '/manage-attendees', icon: 'people' },
+            { title: 'Setup', component: '/lookups', icon: 'cog' }
         ];
 
         this.nonAdminPages = [
-            { title: 'Home', component: HomePage, icon: 'home' },
-            { title: 'Calendar', component: FitnessClassesCalendarPage, icon: 'calendar' },
-            { title: 'My Classes', component: 'RegistrationPage', icon: 'star' }
+            { title: 'Home', component: '/home', icon: 'home' },
+            { title: 'Calendar', component: '/fitness-classes-calendar', icon: 'calendar' },
+            { title: 'My Classes', component: '/registration', icon: 'star' }
         ];
     }
 
@@ -79,19 +77,16 @@ export class AppComponent {
         this.authService.signOut();
     }
 
-    openPage(page: any) {
-        this.nav.setRoot(page).then( (result) => {
-            if (!result){
-                this.toastService.toastUnAuthorized();
-            }
-        });
+    openPage(page: string) {
+        this.router.navigateByUrl(page);
     }
 
-    presentAccountPopover(popOverEvent){
-        let accountPopOver = this.popoverCtrl.create(AccountPopOverComponent);
-        accountPopOver.present({
-            ev: popOverEvent
+    async presentAccountPopover(popOverEvent){
+        const accountPopOver = await this.popoverCtrl.create({
+            component: AccountPopOverComponent,
+            event: popOverEvent
         });
+        await accountPopOver.present();
     }
 
     openMenu(){

@@ -10,6 +10,7 @@ import { InstructorService } from '../api.services/export.api';
     templateUrl: './instructor-modal.page.html',
     styleUrls: ['./instructor-modal.page.scss'],
 })
+
 export class InstructorModalPage implements OnInit {
     public instructorForm: FormGroup;
     public submitAttempt: boolean = false;
@@ -21,7 +22,7 @@ export class InstructorModalPage implements OnInit {
         private loadingService: LoadingService,
         private instructorService: InstructorService)
     {
-        this.instructor = navParams.data;
+        this.instructor = navParams.get('model');
         this.instructorForm = this.buildValidators();
     }
 

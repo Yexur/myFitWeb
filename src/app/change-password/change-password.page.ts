@@ -1,5 +1,6 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { NavController, AlertController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 import { AuthService } from "../app.services/export.app.servies";
 
 @Component({
@@ -14,16 +15,12 @@ export class ChangePasswordPage implements OnInit {
         oldPassword: ''
     };
     constructor(
-        public navCtrl: NavController,
         private alertCtrl: AlertController,
-        private authService: AuthService
+        private authService: AuthService,
+        private location: Location
     ) { }
 
     ngOnInit() {
-    }
-
-    ionViewCanEnter(): boolean{  //not needed use a authguard
-        return this.authService.isAuthenticated();
     }
 
     async changePassword(){
@@ -41,6 +38,6 @@ export class ChangePasswordPage implements OnInit {
             this.changePasswordData.oldPassword,
             this.changePasswordData.newPassword
         );
-        this.navCtrl.pop();  //change to use routing
+        this.location.back();
     }
 }

@@ -26,13 +26,6 @@ export class ManageAttendeesPage implements OnInit {
     }
 
     ngOnInit() {
-    }
-
-    onViewCanEnter(): boolean {
-        return this.authService.isAuthenticated();
-    }
-
-    ionViewDidLoad() {
         this.isAdmin = this.authService.isAdmin();
     }
 

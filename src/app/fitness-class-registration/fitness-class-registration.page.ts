@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
 import { AuthService, LoadingService, ToastService } from '../app.services/export.app.servies';
 import { FitnessClassRegistrationModel, FitnessClassModel } from '../models/export.models';
 import { Observable } from 'rxjs';
@@ -19,30 +19,30 @@ export class FitnessClassRegistrationPage implements OnInit {
     public currentDate: Date = DateUtils.getCurrentDate();
 
     constructor(
-        public navCtrl: NavController,
-        public navParams: NavParams,
+        public activatedRoute: ActivatedRoute,
         private authService: AuthService,
         private loadingService: LoadingService,
         private fitnessClassService: FitnessClassService,
         private toastService: ToastService
     )
     {
-        this.fitnessClass = this.navParams.data;
+    }
+
+    ngOnInit() {
+        this.fitnessClass =
+            this.fitnessClassService.getFitnessClassById(
+                this.activatedRoute.snapshot.paramMap.get('fitnessClassId')
+            );
 
         if (this.fitnessClass) {
             this.fitnessClassTitle = this.fitnessClass.fitnessClassName;
             this.fitnessClassDate = this.fitnessClass.dateOfClass;
         }
+
+        this.loadView();
     }
 
-    ngOnInit() {
-    }
-
-    ionViewCanEnter(): boolean {  //fix this not the right lifecycle method
-        return this.authService.isAdmin();
-    }
-
-    async ionViewDidLoad() {  //fix this not the right lifecycle method
+    async loadView() {  //fix this not the right lifecycle method
         let loader = await this.loadingService.loader();
         loader.present().then(() => {
             this.fitnessClassesRegistrations =

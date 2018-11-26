@@ -21,6 +21,7 @@ import { DateUtils } from '../shared/export.shared';
     templateUrl: './fitness-class-template-modal.page.html',
     styleUrls: ['./fitness-class-template-modal.page.scss'],
 })
+
 export class FitnessClassTemplateModalPage implements OnInit {
 
     public fitnessClassTemplateForm: FormGroup;
@@ -42,7 +43,7 @@ export class FitnessClassTemplateModalPage implements OnInit {
         private instructorService: InstructorService
     )
     {
-        this.fitnessClassTemplate = navParams.data;
+        this.fitnessClassTemplate = navParams.get('model');
 
         this.fitnessClassTemplateTitle = (this.fitnessClassTemplate.fitnessClassName
             ? this.fitnessClassTemplate.fitnessClassName
@@ -52,9 +53,10 @@ export class FitnessClassTemplateModalPage implements OnInit {
     }
 
     ngOnInit() {
+        this.loadView();
     }
 
-    ionViewDidLoad() {
+    loadView() {
         this.fitnessClassTypes = this.fitnessClassTypeService.getFitnessClassTypes();
         this.instructors = this.instructorService.getInstructors();
         this.locations = this.locationService.getLocations();

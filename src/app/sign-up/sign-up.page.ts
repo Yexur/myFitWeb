@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams, AlertController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router'
 import { AuthService } from "../app.services/export.app.servies";
 
 @Component({
@@ -17,12 +18,12 @@ export class SignUpPage implements OnInit {
     };
 
     constructor(
-        private navParams: NavParams,
+        private activatedRoute: ActivatedRoute,
         private alertCtrl: AlertController,
         private authService: AuthService
     )
     {
-        this.signupData.email = this.navParams.get('email');
+        this.signupData.email = this.activatedRoute.snapshot.paramMap.get('email');
     }
 
     ngOnInit() {

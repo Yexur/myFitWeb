@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { Moment } from "moment";
-import { NavController, NavParams, ModalController, PopoverController } from '@ionic/angular';
+import { ModalController, PopoverController } from '@ionic/angular';
 import { Observable } from "rxjs";
 import { FitnessClassModel } from "../models/export.models";
 import { LoadingService, AuthService } from "../app.services/export.app.servies";
@@ -29,8 +29,6 @@ export class FitnessClassesCalendarPage implements OnInit {
     public isAdmin: boolean = false;
 
     constructor(
-        public navCtrl: NavController,
-        public navParams: NavParams,
         private popoverCtrl: PopoverController,
         private fitnessClassService: FitnessClassService,
         private registrationService: RegistrationService,
@@ -41,12 +39,10 @@ export class FitnessClassesCalendarPage implements OnInit {
     }
 
     ngOnInit() {
-    }
-    ionViewCanEnter(): boolean{  //fix life cycle function
-        return this.authService.isAuthenticated();
+        this.loadView();
     }
 
-    ionViewDidLoad() {  //fix life cycle function
+    loadView() {
         this.isAdmin = this.authService.isAdmin();
         this.loadMonthData(moment());
     }
@@ -72,50 +68,51 @@ export class FitnessClassesCalendarPage implements OnInit {
         this.viewTitle = title;
     }
 
-    openRegistrationList(fitnessClass: FitnessClassModel){
+    async openRegistrationList(fitnessClass: FitnessClassModel){
         const modal = await this.modalCtrl.create({
             component: AttendeesListPage,
-            componentProps: { this.fitnessClass },
+            componentProps: {
+                fitnessClass: fitnessClass
+            },
             cssClass: 'largeModal'
         });
-        modal.present();
+        await modal.present();
     }
 
-
-//NEED TO FIGRE OUT HOW TO DO THIS WITH A POPOVER CONTROLLER
-    showMoreOptions(clickEvent, fitnessClass) {
-        const popup = this.popoverCtrl.create( {
+    async showMoreOptions(clickEvent, fitnessClass) {
+        const popup = await this.popoverCtrl.create( {
             component: FitnessClassMenuComponent,
-            componentProps: fitnessClass
+            componentProps: {
+                fitnessClass: fitnessClass
+            },
+            event: clickEvent
         });
+        await popup.present();
 
-
-        this.popoverCtrl.present({ ev: clickEvent });
-
-        popup.onDidDismiss((updated) => {
+        await popup.onDidDismiss().then( (updated) =>{
             if(updated) {
                 this.loadMonthData(moment(this.selectedDay));
             }
         });
     }
 
-    registerForClass(fitnessClass: FitnessClassModel) {
+    async registerForClass(fitnessClass: FitnessClassModel) {
         let loader = await this.loadingService.loader();
-        loader.present().then(() => {
+        await loader.present().then(() => {
             this.registrationService.addRegistration(fitnessClass, this.authService.user);
             loader.dismiss();
         });
     }
 
-    openAddModal() {
+    async openAddModal() {
         const modal = await this.modalCtrl.create({
             component: FitnessClassModalPage,
             cssClass: 'largeModal'
         });
-        modal.present();
+        await modal.present();
     }
 
-    private loadMonthData(month: Moment, includeCancelled: boolean = false): void {
+    private async loadMonthData(month: Moment, includeCancelled: boolean = false) {
         let loader = await this.loadingService.loader();
 
         loader.present().then(() => {

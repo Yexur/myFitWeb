@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
 import { AuthService } from "../app.services/export.app.servies";
 
 @Component({
@@ -15,7 +15,7 @@ export class LoginPage implements OnInit {
     }
 
     constructor(
-        private navCtrl: NavController,
+        private router: Router,
         private authService: AuthService
     ) { }
 
@@ -26,11 +26,11 @@ export class LoginPage implements OnInit {
         this.authService.signInWithEmailAndPassword(this.loginData.email, this.loginData.password);
     }
 
-    signup() {  //use router
-        this.navCtrl.push('SignUpPage', { email: this.loginData.email });
+    signup() {
+        this.router.navigateByUrl('/sign-up/' + this.loginData.email);
     }
 
-    resetPassword(){  //use router
-        this.navCtrl.push('ResetPasswordPage');
+    resetPassword(){
+        this.router.navigateByUrl('/reset-password');
     }
 }

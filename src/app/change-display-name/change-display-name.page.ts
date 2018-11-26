@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { Location } from '@angular/common'
 import { AuthService } from "../app.services/export.app.servies";
 
 @Component({
@@ -14,14 +14,13 @@ export class ChangeDisplayNamePage implements OnInit {
         password: ''
     };
 
-    constructor(public navCtrl: NavController,  private authService: AuthService) {
+    constructor(
+        private authService: AuthService,
+        private location: Location
+    ) {
     }
 
     ngOnInit() {
-    }
-
-    ionViewCanEnter(): boolean{ //TO DO THIS IS NOT A LIFECYCLE METHOD NEED THE AUTH GAURD FOR THIS PAGE
-        return this.authService.isAuthenticated();
     }
 
     changeDisplayName(){
@@ -29,6 +28,6 @@ export class ChangeDisplayNamePage implements OnInit {
             this.changeDisplayNameData.newDisplayName,
             this.changeDisplayNameData.password
         );
-        this.navCtrl.pop();  //need to use navigation
+        this.location.back();
     }
 }

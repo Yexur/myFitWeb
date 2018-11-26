@@ -10,6 +10,7 @@ import { LocationService } from '../api.services/export.api';
     templateUrl: './location-modal.page.html',
     styleUrls: ['./location-modal.page.scss'],
 })
+
 export class LocationModalPage implements OnInit {
     public locationForm: FormGroup;
     public submitAttempt: boolean = false;
@@ -22,7 +23,7 @@ export class LocationModalPage implements OnInit {
         private loadingService: LoadingService,
         private locationService: LocationService)
     {
-        this.location = navParams.data;
+        this.location = navParams.get('model');
         this.locationForm = this.buildValidators();
     }
 

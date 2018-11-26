@@ -1,7 +1,7 @@
 <ion-header>
-    <ion-navbar color="primary">
+    <ion-toolbar color="primary">
         <ion-title>CHANGE DISPLAY NAME</ion-title>
-    </ion-navbar>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
@@ -9,7 +9,7 @@
         <ion-row>
             <ion-col>
                 <ion-item>
-                    <ion-label floating>New Display Name</ion-label>
+                    <ion-label position="floating">New Display Name</ion-label>
                     <ion-input type="text" [(ngModel)]="changeDisplayNameData.newDisplayName" clearInput></ion-input>
                 </ion-item>
             </ion-col>
@@ -17,18 +17,18 @@
         <ion-row>
             <ion-col>
                 <ion-item>
-                    <ion-label floating>Password</ion-label>
+                    <ion-label position="floating">Password</ion-label>
                     <ion-input type="password" [(ngModel)]="changeDisplayNameData.password" clearInput></ion-input>
                 </ion-item>
             </ion-col>
         </ion-row>
         <ion-row>
             <ion-col>
-                <button ion-button
+                <ion-button
                     (click)="changeDisplayName()"
                     [disabled]="!changeDisplayNameData.newDisplayName || !changeDisplayNameData.password">
                     CHANGE DISPLAY NAME
-                </button>
+                </ion-button>
             </ion-col>
         </ion-row>
     </ion-grid>

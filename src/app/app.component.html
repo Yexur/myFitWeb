@@ -10,27 +10,29 @@
             <ion-content>
                 <ion-list>
                     <ion-item>
-                        <button ion-button clear (click)="presentAccountPopover($event)">
-                            <span class='userInfoText'ion-text color='textOnPrimary'>
-                                Account: {{ authService.user.value?.displayName }}
-                            </span>
-                        </button>
+                        <ion-button fill="clear" (click)="presentAccountPopover($event)">
+                            <ion-text>
+                                <span class='userInfoText' color='textOnPrimary'>
+                                    Account: {{ authService.user.value?.displayName }}
+                                </span>
+                            </ion-text>
+                        </ion-button>
                     </ion-item>
                     <ion-item>
-                        <button menuClose ion-item *ngFor="let adminPage of adminPages"
+                        <ion-item menuClose *ngFor="let adminPage of adminPages"
                             (click)="openPage(adminPage.component)">
                             <ion-icon class="sideMenuIcon" name="{{adminPage.icon}}"></ion-icon>
                             {{adminPage.title}}
-                        </button>
+                        </ion-item>
                     </ion-item>
                 </ion-list>
             </ion-content>
             <ion-footer>
                 <ion-toolbar color='headerGrey'>
-                    <button ion-item (click)="signOut()" color='headerGrey'>
+                    <ion-item (click)="signOut()" color='headerGrey'>
                         <ion-icon name="power" class="sideMenuIcon"></ion-icon>
                         Logout
-                    </button>
+                    </ion-item>
                 </ion-toolbar>
             </ion-footer>
         </ion-menu>
@@ -45,28 +47,30 @@
             <ion-content>
                 <ion-list>
                     <ion-item>
-                        <button ion-button clear (click)="presentAccountPopover($event)">
-                            <span class='userInfoText'ion-text color='textOnPrimary'>
-                                Account: {{ authService.user.value?.displayName }}
-                            </span>
-                        </button>
+                        <ion-button fill="clear" (click)="presentAccountPopover($event)">
+                            <ion-text>
+                                <span class='userInfoText' color='textOnPrimary'>
+                                    Account: {{ authService.user.value?.displayName }}
+                                </span>
+                            </ion-text>
+                        </ion-button>
                     </ion-item>
                     <ion-item>
-                        <button menuClose ion-item *ngFor="let nonAdminPage of nonAdminPages"
+                        <ion-item menuClose *ngFor="let nonAdminPage of nonAdminPages"
                             (click)="openPage(nonAdminPage.component)">
                             <ion-icon class="sideMenuIcon" name="{{nonAdminPage.icon}}"></ion-icon>
                             {{nonAdminPage.title}}
-                        </button>
+                        </ion-item>
                     </ion-item>
                 </ion-list>
             </ion-content>
 
             <ion-footer>
                 <ion-toolbar color='headerGrey'>
-                    <button ion-item (click)="signOut()" color='headerGrey'>
+                    <ion-item (click)="signOut()" color='headerGrey'>
                         <ion-icon name="power" class="sideMenuIcon"></ion-icon>
                         Logout
-                    </button>
+                    </ion-item>
                 </ion-toolbar>
             </ion-footer>
         </ion-menu>

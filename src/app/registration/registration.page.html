@@ -1,10 +1,12 @@
 <ion-header>
-    <ion-navbar color="primary">
-        <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-        </button>
+    <ion-toolbar color="primary">
+        <ion-menu-toggle>
+            <ion-button>
+                <ion-icon name="menu"></ion-icon>
+            </ion-button>
+        </ion-menu-toggle>
         <ion-title>Registrations</ion-title>
-    </ion-navbar>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
@@ -18,7 +20,7 @@
 
     <ion-grid>
         <ion-row>
-            <ion-col *ngFor="let registration of registrations | async" col-12 col-md-6 col-lg-6>
+            <ion-col *ngFor="let registration of registrations | async" size="12" size-md="6" size-lg="6">
                 <ion-card>
                     <ion-card-header color='secondaryDark'>
                         {{ registration.fitnessClassName }}
@@ -55,12 +57,12 @@
                         </ion-list>
                     </ion-card-content>
                     <ion-item color='secondaryDark'>
-                        <button ion-button icon-left clear item-end
+                        <ion-button slot="start" fill="clear" item-end
                             (click)="cancel(registration)"
                             *ngIf="registration.dateOfClass >= currentDate">
                             <ion-icon name="trash"></ion-icon>
                             Cancel Registration
-                        </button>
+                        </ion-button>
                     </ion-item>
                 </ion-card>
             </ion-col>

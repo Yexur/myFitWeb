@@ -8,7 +8,7 @@
     <ion-list>
         <form [formGroup]='announcementForm'>
             <ion-item>
-                <ion-label floating>Title</ion-label>
+                <ion-label position="floating">Title</ion-label>
                 <ion-input
                     formControlName="announcementTitle"
                     type="text" clearInput autocomplete="true">
@@ -22,7 +22,7 @@
             </ion-item>
 
             <ion-item>
-                <ion-label floating>Comment</ion-label>
+                <ion-label position="floating">Comment</ion-label>
                 <ion-textarea
                     formControlName="announcementComment"
                     rows="10" type="textarea" autocomplete="true">
@@ -36,13 +36,17 @@
             </ion-item>
         </form>
         <ion-item>
-            <ion-buttons start>
-                <button ion-button (click)="dismiss()">
-                    <span ion-text color='textOnPrimary'>Cancel</span>
-                </button>
-                <button ion-button (click)="save()" [disabled]="!announcementForm.valid">
-                    <span ion-text color='textOnPrimary'>Save</span>
-                </button>
+            <ion-buttons slot="secondary">
+                <ion-button (click)="dismiss()">
+                    <ion-text>
+                        <span color='textOnPrimary'>Cancel</span>
+                    </ion-text>
+                </ion-button>
+                <ion-button (click)="save()" [disabled]="!announcementForm.valid">
+                    <ion-text>
+                        <span color='textOnPrimary'>Save</span>
+                    </ion-text>
+                </ion-button>
             </ion-buttons>
         </ion-item>
     </ion-list>

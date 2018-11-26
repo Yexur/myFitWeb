@@ -1,9 +1,11 @@
 <ion-header>
-    <ion-navbar color="primary">
-        <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-        </button>
-    </ion-navbar>
+    <ion-toolbar color="primary">
+        <ion-menu-toggle>
+            <ion-button>
+                <ion-icon name="menu"></ion-icon>
+            </ion-button>
+        </ion-menu-toggle>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
@@ -12,10 +14,10 @@
                 Fitness Class Templates
                 <ion-icon name="document"></ion-icon>
         </ion-list-header>
-        <button ion-item *ngFor="let fitnessClassTemplate of fitnessClassTemplates | async"
+        <ion-item *ngFor="let fitnessClassTemplate of fitnessClassTemplates | async"
             (click)="openEditFitnessClassTemplateModal(fitnessClassTemplate)">
             {{ fitnessClassTemplate.fitnessClassName }}
-        </button>
+        </ion-item>
 
         <ion-list-header color='greyInactive'>
             Instructors
@@ -33,18 +35,18 @@
             {{ location.locationName }}
         </ion-item>
     </ion-list>
-    <ion-fab bottom right>
-        <button ion-fab mini color='secondary'><ion-icon name="add"></ion-icon></button>
+    <ion-fab slot="fixed" vertical="bottom" right>
+        <ion-fab-button mini color='secondary'><ion-icon name="add"></ion-icon></ion-fab-button>
         <ion-fab-list side="top">
-            <button color='greyInactive' ion-fab (click)="openAddFitnessClassTemplateModal()">
+            <ion-fab-button color='greyInactive' (click)="openAddFitnessClassTemplateModal()">
                 <ion-icon name="document"></ion-icon>
-            </button>
-            <button color='greyInactive' ion-fab (click)="openAddInstructorModal()">
+            </ion-fab-button>
+            <ion-fab-button color='greyInactive' (click)="openAddInstructorModal()">
                 <ion-icon name="person"></ion-icon>
-            </button>
-            <button color='greyInactive' ion-fab (click)="openAddLocationModal()">
+            </ion-fab-button>
+            <ion-fab-button color='greyInactive' (click)="openAddLocationModal()">
                 <ion-icon name="compass"></ion-icon>
-            </button>
+            </ion-fab-button>
         </ion-fab-list>
     </ion-fab>
 </ion-content>

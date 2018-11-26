@@ -1,30 +1,32 @@
 <ion-header>
-    <ion-navbar color="primary">
-        <button ion-button menuToggle>
-            <ion-icon name="menu"></ion-icon>
-        </button>
-    </ion-navbar>
+    <ion-toolbar color="primary">
+        <ion-menu-toggle>
+            <ion-button>
+                <ion-icon name="menu"></ion-icon>
+            </ion-button>
+        </ion-menu-toggle>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
     <ion-grid no-padding>
         <ion-row>
-            <ion-col col-1>
-                <button ion-button icon-only clear (click)="prevMonthClicked($event)">
+            <ion-col size="1">
+                <ion-button icon-only fill="clear" (click)="prevMonthClicked($event)">
                     <ion-icon color="grey" name="ios-arrow-back"></ion-icon>
-                </button>
+                </ion-button>
             </ion-col>
-            <ion-col col-10>
+            <ion-col size="10">
                 <ion-title class="calendar-title">{{viewTitle}}</ion-title>
             </ion-col>
-            <ion-col col-1>
-                <button ion-button icon-only clear float-right (click)="nextMonthClicked($event)">
+            <ion-col size="1">
+                <ion-button icon-only fill="clear" float-right (click)="nextMonthClicked($event)">
                     <ion-icon color="grey" name="ios-arrow-forward"></ion-icon>
-                </button>
+                </ion-button>
             </ion-col>
         </ion-row>
         <ion-row>
-            <ion-col col-12>
+            <ion-col size="12">
                 <calendar
                     [eventSource]="eventSource"
                     [calendarMode]="calendar.mode"
@@ -41,15 +43,15 @@
         <ng-template #CardTemplate let-showEventDetail="showEventDetail" let-selectedDate="selectedDate" let-noEventsLabel="noEventsLabel">
             <ion-grid>
                 <ion-row [class]="selectedDate?.events.length > 0 ? 'row' : 'row noData' ">
-                    <ion-col *ngFor="let fitnessClass of selectedDate?.events" col-12 col-md-6 col-lg-6><!-- add (click)=eventSelected(event) to have click event handlers -->
+                    <ion-col *ngFor="let fitnessClass of selectedDate?.events" size="12" size-md="6" size-lg="6"><!-- add (click)=eventSelected(event) to have click event handlers -->
                         <ion-card text-wrap class="fitness-class-card">
                             <ion-card-header>
                                 <ion-list>
                                     <ion-item no-padding>
                                         <p>{{ fitnessClass.dateOfClass | date:'longDate' }}</p>
-                                        <button class="header-more" ion-button item-end icon-only clear large (click)="showMoreOptions($event, fitnessClass)">
+                                        <ion-button class="header-more" item-end icon-only fill="clear" size="large" (click)="showMoreOptions($event, fitnessClass)">
                                             <ion-icon no-padding color="grey" name="ios-more"></ion-icon>
-                                        </button>
+                                        </ion-button>
                                     </ion-item>
                                     <ion-item no-padding>
                                         <h1>{{ fitnessClass.fitnessClassName }}</h1>
@@ -71,20 +73,20 @@
                                 </ion-label>
                             </ion-card-content>
                             <ion-item>
-                                <button ion-button icon-left clear item-end default color="secondary"
+                                <ion-button slot="start" fill="clear" item-end default color="secondary"
                                         [disabled]="!fitnessClass.hasRegistrations"
                                         (click)="openRegistrationList(fitnessClass)"
                                 >
                                     <ion-icon color="secondary" name="md-people"></ion-icon>
                                     Attendees
-                                </button>
-                                <button ion-button icon-left clear item-end default color="secondary"
+                                </ion-button>
+                                <ion-button slot="start" fill="clear" item-end default color="secondary"
                                         [disabled]="fitnessClass.remainingCapacity == 0"
                                         (click)="registerForClass(fitnessClass)"
                                 >
                                     <ion-icon color="secondary" name="md-add"></ion-icon>
                                     Attend
-                                </button>
+                                </ion-button>
                             </ion-item>
                         </ion-card>
                     </ion-col>
@@ -95,9 +97,9 @@
             </ion-grid>
         </ng-template>
     </ion-grid>
-    <ion-fab right bottom *ngIf="isAdmin">
-        <button ion-fab mini (click)="openAddModal()" color='secondary'>
+    <ion-fab slot="fixed" right vertical="bottom" *ngIf="isAdmin">
+        <ion-fab-button mini (click)="openAddModal()" color='secondary'>
             <ion-icon name="md-add"></ion-icon>
-        </button>
+        </ion-fab-button>
     </ion-fab>
 </ion-content>>

@@ -8,7 +8,7 @@
     <ion-list>
         <form [formGroup]='locationForm'>
             <ion-item>
-                <ion-label floating>Location</ion-label>
+                <ion-label position="floating">Location</ion-label>
                 <ion-input
                     formControlName='locationName'
                     type="text" clearInput autocomplete="true">
@@ -22,13 +22,17 @@
             </ion-item>
         </form>
         <ion-item>
-            <ion-buttons start>
-                <button ion-button (click)="dismiss()">
-                    <span ion-text color='textOnPrimary'>Cancel</span>
-                </button>
-                <button ion-button (click)="save()" [disabled]="!locationForm.valid">
-                    <span ion-text color='textOnPrimary'>Save</span>
-                </button>
+            <ion-buttons slot="secondary">
+                <ion-button (click)="dismiss()">
+                    <ion-text>
+                        <span color='textOnPrimary'>Cancel</span>
+                    </ion-text>
+                </ion-button>
+                <ion-button (click)="save()" [disabled]="!locationForm.valid">
+                    <ion-text>
+                        <span color='textOnPrimary'>Save</span>
+                    </ion-text>
+                </ion-button>
             </ion-buttons>
         </ion-item>
     </ion-list>

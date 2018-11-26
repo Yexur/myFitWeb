@@ -22,6 +22,7 @@ export class FitnessClassModalPage implements OnInit {
     public fitnessClassTemplates: Observable<FitnessClassTemplateModel[]>;
     public instructors: Observable<InstructorModel[]>;
     public locations: Observable<LocationModel[]>;
+
     constructor(
         public navParams: NavParams,
         private formBuilder: FormBuilder,
@@ -33,7 +34,7 @@ export class FitnessClassModalPage implements OnInit {
         private fitnessClassTemplateService: FitnessClassTemplateService
     )
     {
-        this.fitnessClass = navParams.data;
+        this.fitnessClass = navParams.get('fitnessClass');
 
         this.fitnessClassNameTitle = (this.fitnessClass.fitnessClassName
             ? this.fitnessClass.fitnessClassName
@@ -43,9 +44,10 @@ export class FitnessClassModalPage implements OnInit {
     }
 
     ngOnInit() {
+        this.loadView();
     }
 
-    ionViewDidLoad() {
+    loadView() {
         this.fitnessClassTemplates = this.fitnessClassTemplateService.getFitnessClassTemplates();
         this.instructors = this.instructorService.getInstructors();
         this.locations = this.locationService.getLocations();

@@ -23,7 +23,7 @@ export class AnnouncementModalPage implements OnInit {
         private announcementService: AnnouncementService
     )
     {
-        this.announcement = navParams.data
+        this.announcement = navParams.get('announcement');
         this.title = (this.announcement.title ? this.announcement.title : "Add New Announcement");
         this.announcementForm = this.buildValidators();
     }

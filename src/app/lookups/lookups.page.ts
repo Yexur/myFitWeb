@@ -37,13 +37,10 @@ export class LookupsPage implements OnInit {
     }
 
     ngOnInit() {
+        this.loadView();
     }
 
-    ionViewCanEnter(): boolean {
-        return this.authService.isAdmin();
-    }
-
-    async ionViewDidLoad() {
+    async loadView() {
         let loader = await this.loadingService.loader();
         loader.present().then(() => {
             this.instructors = this.instructorService.getInstructors();
@@ -72,7 +69,9 @@ export class LookupsPage implements OnInit {
     private async createSmallModal(page: any, model: any){
         let modal = await this.modalCtrl.create({
             component: page,
-            componentProps: model,
+            componentProps: {
+                model: model
+            },
             cssClass:'smallModal',
             backdropDismiss: false
         });
@@ -82,7 +81,9 @@ export class LookupsPage implements OnInit {
     private async createLargeModal(page: any, model: any){
         let modal = await this.modalCtrl.create({
             component: page,
-            componentProps: model,
+            componentProps: {
+                model: model
+            },
             cssClass:'largeModal',
             backdropDismiss: false
         })

@@ -24,13 +24,10 @@ export class RegistrationPage implements OnInit {
     }
 
     ngOnInit() {
+        this.loadView();
     }
 
-    ionViewCanEnter(): boolean{
-        return this.authService.isAuthenticated();
-    }
-
-    async ionViewDidLoad() {
+    async loadView() {
         let loader = await this.loadingService.loader();
         loader.present().then(() => {
             this.registrations =

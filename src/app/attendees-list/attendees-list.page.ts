@@ -11,15 +11,19 @@ import { ManageAttendeesService } from "../api.services/export.api";
 })
 export class AttendeesListPage implements OnInit {
     public people: Observable<ManageAttendeesModel[]>;
+
     constructor(
         public navParams: NavParams,
         public modalCntr: ModalController,
         private manageAttendeesService: ManageAttendeesService
     ) {
-        this.people = this.manageAttendeesService.getAttendeesForClass(this.navParams.data.id)
     }
 
     ngOnInit() {
+        this.people =
+            this.manageAttendeesService.getAttendeesForClass(
+                this.navParams.get('fitnessClass').id
+            );
     }
 
     closeModal() {

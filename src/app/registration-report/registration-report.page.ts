@@ -22,12 +22,4 @@ export class RegistrationReportPage implements OnInit {
 
     ngOnInit() {
     }
-
-    ionViewCanEnter(): boolean {
-        return this.authService.isAuthenticated();
-    }
-
-    ionViewDidLoad() {
-        console.log('ionViewDidLoad RegistrationReportPage');
-    }
 }

@@ -18,11 +18,26 @@ import { ToastService } from '../app.services/export.app.servies';
 })
 export class FitnessClassService {
 
+     //TODO: add a validator to the form for the start and end date being the same
+    //TODO:add a validator to the form for the starrt date being after the end date
+    private fitnessClass: FitnessClassModel;
+
     constructor(private database: AngularFirestore, private toastService: ToastService) {
     }
 
-    //TODO: add a validator to the form for the start and end date being the same
-    //TODO:add a validator to the form for the starrt date being after the end date
+    getFitnessClassById(fitnessClassId: string): FitnessClassModel{
+        let path = FITNESS_CLASSES + '/' + fitnessClassId;
+        this.database.doc<FitnessClassModel>(path).snapshotChanges().pipe(map(fsFitnessClass => {
+            if (fsFitnessClass.payload.exists) {
+                const data = fsFitnessClass.payload.data() as FitnessClassData;
+                const id = fsFitnessClass.payload.id;
+                return {id, ...data};
+            }
+        })).subscribe(fClass => this.fitnessClass = fClass);
+
+        return this.fitnessClass;
+   }
+
     getCurrentFitnessClasses(): Observable<FitnessClassModel[]> {
         let fitnessClassCollection = this.database.collection<FitnessClassData>(
                 FITNESS_CLASSES,

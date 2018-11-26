@@ -24,11 +24,11 @@ export class HomePage {
     ) {
     }
 
-    ionViewCanEnter(): boolean {  //use router and auth gaurd
-        return this.authService.isAuthenticated();
+    ngOnInit(): void {
+        this.loadView();
     }
 
-    async ionViewDidLoad() {  //find the correct life cycle method
+    async loadView() {
         this.isAdmin = this.authService.isAdmin();
         let loader = await this.loadingService.loader();
         loader.present().then(() => {
@@ -74,7 +74,9 @@ export class HomePage {
     async openEditModal(announcement: AnnouncementModel) {
         const modal = await this.modalCtrl.create({
             component: AnnouncementModalPage,
-            componentProps: announcement,
+            componentProps:{
+                announcement: announcement
+            },
             cssClass:  'smallModal',
             backdropDismiss: false
         });

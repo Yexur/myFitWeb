@@ -28,8 +28,8 @@ export class RegistrationPage implements OnInit {
     }
 
     async loadView() {
-        let loader = await this.loadingService.loader();
-        loader.present().then(() => {
+        const loader = await this.loadingService.loader();
+        await loader.present().then(() => {
             this.registrations =
                 this.registrationService.getRegistrationsByUser(this.authService.user.value.id);
             loader.dismiss();
@@ -38,8 +38,8 @@ export class RegistrationPage implements OnInit {
 
     async cancel(registration: RegistrationModel) {
         if (registration.dateOfClass >= this.currentDate) {
-            let loader = await this.loadingService.loader();
-            loader.present().then(() => {
+            const loader = await this.loadingService.loader();
+            await loader.present().then(() => {
                 this.registrationService.cancelRegistration(registration, this.authService.user);
                 loader.dismiss();
             });
@@ -50,8 +50,8 @@ export class RegistrationPage implements OnInit {
 
     async updateAttended(registration: RegistrationModel) {
         if (registration.dateOfClass <= this.currentDate) {
-            let loader = await this.loadingService.loader();
-            loader.present().then(() => {
+            const loader = await this.loadingService.loader();
+            await loader.present().then(() => {
                 this.registrationService.updateAttendance(registration, this.authService.user);
                 loader.dismiss();
             });

@@ -39,8 +39,8 @@ export class FitnessClassPage implements OnInit {
 
     async ionViewDidLoad() {
         this.isAdmin = this.authService.isAdmin();
-        let loader = await this.loadingService.loader();
-        loader.present().then(() => {
+        const loader = await this.loadingService.loader();
+        await loader.present().then(() => {
             this.fitnessClasses = this.fitnessClassService.getCurrentFitnessClasses();
             loader.dismiss();
         });
@@ -48,7 +48,7 @@ export class FitnessClassPage implements OnInit {
 
     //TODO: For now this will be a manual notifcation to the users until we get the notification service working.
     async cancel(fitnessClass: FitnessClassModel) {
-        let alert = await this.alertCtrl.create({
+        const alert = await this.alertCtrl.create({
             header: 'Confirm Cancel',
             subHeader: 'Cancelling the following class will also cancel all registrations',
             message: fitnessClass.fitnessClassName,
@@ -69,7 +69,7 @@ export class FitnessClassPage implements OnInit {
                 }
             ]
         });
-        alert.present();
+       await alert.present();
     }
 
     async openEditModal(fitnessClass: FitnessClassModel) {
@@ -92,16 +92,16 @@ export class FitnessClassPage implements OnInit {
     }
 
     async registerForClass(fitnessClass: FitnessClassModel) {
-        let loader = await this.loadingService.loader();
-        loader.present().then(() => {
+        const loader = await this.loadingService.loader();
+        await loader.present().then(() => {
             this.registrationService.addRegistration(fitnessClass, this.authService.user);
             loader.dismiss();
         });
     }
 
     async search() {
-        let loader = await this.loadingService.loader();
-        loader.present().then(() => {
+        const loader = await this.loadingService.loader();
+        await loader.present().then(() => {
             this.fitnessClasses = this.fitnessClassService.getFitnessClassesByParams
                 (
                     this.fromDate,

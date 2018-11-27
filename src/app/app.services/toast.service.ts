@@ -42,7 +42,7 @@ export class ToastService {
     }
 
     private async displayToastMessageWithDuration(message: string, duration: number){
-        let toast = await this.toastCtrl.create({
+        const toast = await this.toastCtrl.create({
             message: message,
             duration: duration
         });

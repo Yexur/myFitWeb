@@ -61,7 +61,7 @@ export class AuthService {
             this.toastService.toastWelcome(displayName);
         })
         .catch(async err => {  //change to a toaster error
-            let alert = await this.alertCtrl.create({
+            const alert = await this.alertCtrl.create({
                 header: 'Error',
                 message: err.message,
                 buttons: ['OK']
@@ -118,7 +118,7 @@ export class AuthService {
             this.toastService.toastEmailSent(email);
         }).catch(async err => { //change to a toast ererror
             if(err.code === 'auth/invalid-email'){
-                let alert = await this.alertCtrl.create({
+                const alert = await this.alertCtrl.create({
                     header: 'Error',
                     message: err.message,
                     buttons: ['OK']

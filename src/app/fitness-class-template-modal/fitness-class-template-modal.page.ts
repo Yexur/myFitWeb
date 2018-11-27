@@ -70,8 +70,8 @@ export class FitnessClassTemplateModalPage implements OnInit {
         this.submitAttempt = true;
 
         if(this.fitnessClassTemplateForm.valid) {
-            let loader = await this.loadingService.loader();
-            loader.present().then(() => {
+            const loader = await this.loadingService.loader();
+            await loader.present().then(() => {
                 this.fitnessClassTemplate.fitnessClassName =
                     this.fitnessClassTemplateForm.controls.fitnessClassName.value;
                 this.fitnessClassTemplate.instructor = this.fitnessClassTemplateForm.controls.instructor.value;

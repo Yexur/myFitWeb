@@ -115,7 +115,7 @@ export class FitnessClassesCalendarPage implements OnInit {
     private async loadMonthData(month: Moment, includeCancelled: boolean = false) {
         let loader = await this.loadingService.loader();
 
-        loader.present().then(() => {
+        await loader.present().then(() => {
             let calendarStart = DateUtils.convertMomentToDateString(
                 month.clone().startOf('month').add(-6, 'days')
             );

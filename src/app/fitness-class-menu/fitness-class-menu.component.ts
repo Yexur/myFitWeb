@@ -63,7 +63,7 @@ export class FitnessClassMenuComponent implements OnInit {
     }
 
     private async showAlert(title, subTitle, action: (fClass: FitnessClassModel) => {}) {
-        let alert = await this.alertCtrl.create({
+        const alert = await this.alertCtrl.create({
             header: title,
             subHeader: subTitle,
             message: this.fitnessClass.fitnessClassName,
@@ -76,8 +76,8 @@ export class FitnessClassMenuComponent implements OnInit {
                 {
                     text: 'OK',
                     handler: async () => {
-                        let loader = await this.loadingService.loader();
-                        loader.present().then(() => {
+                        const loader = await this.loadingService.loader();
+                        await loader.present().then(() => {
                             action(this.fitnessClass);
                             this.popoverCtrl.dismiss(true);
                             loader.dismiss();

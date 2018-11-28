@@ -48,7 +48,7 @@
                             <ion-card-header>
                                 <ion-list>
                                     <ion-item no-padding>
-                                        <p>{{ fitnessClass.dateOfClass | date:'longDate' }}</p>
+                                        <ion-label>{{ fitnessClass.dateOfClass | date:'longDate' }}</ion-label>
                                         <ion-button class="header-more" item-end icon-only fill="clear" size="large" (click)="showMoreOptions($event, fitnessClass)">
                                             <ion-icon no-padding color="grey" name="ios-more"></ion-icon>
                                         </ion-button>
@@ -57,7 +57,7 @@
                                         <h1>{{ fitnessClass.fitnessClassName }}</h1>
                                     </ion-item>
                                     <ion-item no-padding *ngIf="fitnessClass.cancelled">
-                                        <p class="cancelled">Cancelled</p>
+                                        <ion-label class="cancelled">Cancelled</ion-label>
                                     </ion-item>
                                 </ion-list>
                             </ion-card-header>

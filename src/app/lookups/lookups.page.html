@@ -16,7 +16,7 @@
         </ion-list-header>
         <ion-item *ngFor="let fitnessClassTemplate of fitnessClassTemplates | async"
             (click)="openEditFitnessClassTemplateModal(fitnessClassTemplate)">
-            {{ fitnessClassTemplate.fitnessClassName }}
+            <ion-label>{{ fitnessClassTemplate.fitnessClassName }}</ion-label>
         </ion-item>
 
         <ion-list-header color='greyInactive'>
@@ -24,7 +24,7 @@
             <ion-icon name="person"></ion-icon>
         </ion-list-header>
         <ion-item *ngFor="let instructor of instructors | async">
-            {{ instructor.instructorLastName }}, {{ instructor.instructorFirstName }}
+            <ion-label>{{ instructor.instructorLastName }}, {{ instructor.instructorFirstName }}</ion-label>
         </ion-item>
 
         <ion-list-header color='greyInactive'>
@@ -32,7 +32,7 @@
             <ion-icon name="compass"></ion-icon>
         </ion-list-header>
         <ion-item *ngFor="let location of locations | async">
-            {{ location.locationName }}
+            <ion-label>{{ location.locationName }}</ion-label>
         </ion-item>
     </ion-list>
     <ion-fab slot="fixed" vertical="bottom" right>

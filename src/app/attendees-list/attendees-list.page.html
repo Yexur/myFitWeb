@@ -11,6 +11,8 @@
 
 <ion-content padding>
     <ion-row>
-        <ion-item *ngFor="let person of people | async">{{ person.displayName }}</ion-item>
+        <ion-item *ngFor="let person of people | async">
+            <ion-label>{{ person.displayName }}</ion-label>
+        </ion-item>
     </ion-row>
 </ion-content>

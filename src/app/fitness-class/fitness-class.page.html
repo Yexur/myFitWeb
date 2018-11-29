@@ -1,0 +1,115 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-menu-toggle>
+            <ion-button>
+                <ion-icon name="menu"></ion-icon>
+            </ion-button>
+        </ion-menu-toggle>
+        <ion-title>Fitness Classes</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-list *ngIf="isAdmin" class="padding">
+        <ion-item>
+            <ion-label>From:</ion-label>
+            <ion-datetime displayFormat="DD MMM DDD, YYYY" max="2100" [(ngModel)]="fromDate"></ion-datetime>
+        </ion-item>
+        <ion-item>
+            <ion-label>To:</ion-label>
+            <ion-datetime displayFormat="DD MMM DDD, YYYY" max="2100" [(ngModel)]="toDate"></ion-datetime>
+        </ion-item>
+        <ion-item>
+            <ion-label>Include Cancelled</ion-label>
+            <ion-checkbox (click)="toggleShowCancelled()"checked={{includeCancelled}}></ion-checkbox>
+            <ion-button item-end (click)="search()">Search</ion-button>
+            <ion-button item-end (click)="clearSearch()">Clear</ion-button>
+        </ion-item>
+    </ion-list>
+
+    <ion-grid *ngIf="(fitnessClasses | async)?.length==0">
+        <ion-row class="noData">
+            <ion-col>
+                <h1>No fitness class are currently available</h1>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+        <ion-row>
+            <ion-col *ngFor="let fitnessClass of fitnessClasses | async" size="12" size-md="6" size-lg="6">
+                <ion-card>
+                    <ion-card-header [color]="!fitnessClass.cancelled ? 'secondaryDark' : 'greyInactive'">
+                        {{ fitnessClass.fitnessClassName }}
+                    </ion-card-header>
+                    <ion-card-content>
+                        <ion-list>
+                            <h2>{{ fitnessClass.description }}</h2>
+                            <ion-item>
+                                <ion-label>
+                                    <p>Date: {{ fitnessClass.dateOfClass | date }}</p>
+                                </ion-label>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label>
+                                    <p>Start time: {{ fitnessClass.startTime }} to {{ fitnessClass.endTime }}</p>
+                                </ion-label>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label>
+                                    <p>Instructor: {{ fitnessClass.instructor }}</p>
+                                </ion-label>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label>
+                                    <p>Location: {{ fitnessClass.location }}</p>
+                                </ion-label>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label>
+                                    <p>Remaining Capacity: {{ fitnessClass.remainingCapacity }}</p>
+                                </ion-label>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label>
+                                    <p>Capacity: {{ fitnessClass.capacity }}</p>
+                                </ion-label>
+                            </ion-item>
+                        </ion-list>
+                    </ion-card-content>
+                    <ion-item [color]="!fitnessClass.cancelled ? 'secondaryDark' : 'greyInactive'">
+                        <ion-button slot="start" fill="clear" item-end
+                            (click)="cancel(fitnessClass)"
+                            *ngIf="(isAdmin && !fitnessClass.cancelled &&
+                                (fitnessClass.dateOfClass >= currentDate ||
+                                (fitnessClass.dateOfClass <= currentDate && !fitnessClass.hasRegistrations) ))">
+                            <ion-icon name="trash"></ion-icon>
+                            Cancel
+                        </ion-button>
+                        <ion-button slot="start" fill="clear" item-end
+                            (click)="openEditModal(fitnessClass)" *ngIf="(isAdmin && !fitnessClass.hasRegistrations)">
+                            <ion-icon name="cog"></ion-icon>
+                            Edit
+                        </ion-button>
+                        <ion-button slot="start" fill="clear" item-end
+                            (click)="openCopyModal(fitnessClass)" *ngIf="isAdmin">
+                            <ion-icon name="copy"></ion-icon>
+                            Copy
+                        </ion-button>
+                        <ion-button slot="start" fill="clear" item-end
+                            (click)="openRegistrationList(fitnessClass)"
+                            *ngIf="(isAdmin && fitnessClass.hasRegistrations)">
+                            <ion-icon name="eye"></ion-icon>
+                            View Registrations
+                        </ion-button>
+                        <ion-button slot="start" fill="clear" item-end
+                            (click)="registerForClass(fitnessClass)"
+                            *ngIf="(fitnessClass.remainingCapacity > 0 && fitnessClass.dateOfClass >= currentDate && !fitnessClass.cancelled)">
+                            <ion-icon name="clipboard"></ion-icon>
+                            Register
+                        </ion-button>
+                    </ion-item>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

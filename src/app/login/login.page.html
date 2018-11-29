@@ -1,0 +1,53 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-menu-toggle>
+            <ion-button>
+                <ion-icon name="menu"></ion-icon>
+            </ion-button>
+        </ion-menu-toggle>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <ion-icon class="myfit-logo"></ion-icon>
+                <ion-title>MyFit</ion-title>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="12">
+                <ion-item>
+                    <ion-label position="floating">E-mail</ion-label>
+                    <ion-input type="text" [(ngModel)]="loginData.email" clearInput></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-label position="floating">Password</ion-label>
+                    <ion-input type="password" [(ngModel)]="loginData.password" clearInput></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-button (click)="login()" [disabled]="!loginData.email || !loginData.password">
+                    SIGN IN
+                </ion-button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-button fill="clear" color="secondary" (click)="signup()">Register</ion-button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-button fill="clear" (click)="resetPassword()">Forgot Password?</ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

@@ -1,0 +1,39 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title>Location</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+        <form [formGroup]='locationForm'>
+            <ion-item>
+                <ion-label position="floating">Location</ion-label>
+                <ion-input
+                    formControlName='locationName'
+                    type="text" clearInput autocomplete="true">
+                        {{ location.locationName }}
+                </ion-input>
+            </ion-item>
+
+            <ion-item *ngIf="!locationForm.controls.locationName.valid  &&
+                (locationForm.controls.locationName.dirty || submitAttempt)">
+                <p>Please enter a valid location.</p>
+            </ion-item>
+        </form>
+        <ion-item>
+            <ion-buttons slot="secondary">
+                <ion-button (click)="dismiss()">
+                    <ion-text>
+                        <span color='textOnPrimary'>Cancel</span>
+                    </ion-text>
+                </ion-button>
+                <ion-button (click)="save()" [disabled]="!locationForm.valid">
+                    <ion-text>
+                        <span color='textOnPrimary'>Save</span>
+                    </ion-text>
+                </ion-button>
+            </ion-buttons>
+        </ion-item>
+    </ion-list>
+</ion-content>

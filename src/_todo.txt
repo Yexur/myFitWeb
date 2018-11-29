@@ -1,0 +1,6 @@
+add the styling to the correct files and fix the elements
+test functionaity (db and work flow)
+fix errors
+fix circular references
+test the auth guard
+test the styling

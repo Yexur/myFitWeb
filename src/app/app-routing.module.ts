@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard, RoleGuard } from './app.services/export.app.servies';
+import { FitnessClassPage } from './fitness-class/fitness-class.page';
+//import { FitnessClassesCalendarPage } from './fitness-classes-calendar/fitness-classes-calendar.page';
+import { LookupsPage } from './lookups/lookups.page';
 
 const routes: Routes = [
     { path: '',
@@ -12,7 +15,7 @@ const routes: Routes = [
     },
     { path: 'home',
         loadChildren: './home/home.module#HomePageModule',
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard]  //add the annoucement modal as part of the children
     },
     { path: 'change-display-name',
         loadChildren: './change-display-name/change-display-name.module#ChangeDisplayNamePageModule',
@@ -23,7 +26,7 @@ const routes: Routes = [
         canActivate: [AuthGuard]
     },
     { path: 'fitness-class',
-        loadChildren: './fitness-class/fitness-class.module#FitnessClassPageModule',
+        component: FitnessClassPage,
         canActivate: [AuthGuard],
         children: [
             { path: 'fitness-class-registration/:fitnessClassId',
@@ -36,18 +39,18 @@ const routes: Routes = [
             }
         ]
     },
-    { path: 'fitness-classes-calendar',
-        loadChildren: './fitness-classes-calendar/fitness-classes-calendar.module#FitnessClassesCalendarPageModule',
-        canActivate: [AuthGuard],
-        children: [
-            { path: 'fitness-class-modal',
-                loadChildren: './fitness-class-modal/fitness-class-modal.module#FitnessClassModalPageModule',
-                canActivate: [RoleGuard]
-            }
-        ]
-    },
+    // { path: 'fitness-classes-calendar',
+    //     component: FitnessClassesCalendarPage,
+    //     canActivate: [AuthGuard],
+    //     children: [
+    //         { path: 'fitness-class-modal',
+    //             loadChildren: './fitness-class-modal/fitness-class-modal.module#FitnessClassModalPageModule',
+    //             canActivate: [RoleGuard]
+    //         }
+    //     ]
+    // },
     { path: 'lookups',
-        loadChildren: './lookups/lookups.module#LookupsPageModule',
+        component: LookupsPage,
         canActivate: [RoleGuard],
         children: [
             { path:'fitness-class-template-modal',

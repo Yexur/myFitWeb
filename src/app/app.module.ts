@@ -26,7 +26,10 @@ import {
     RegistrationService,
     UserService} from './api.services/export.api';
 
-import { ToastService, AuthService, LoadingService } from "./app.services/export.app.servies";
+import { ToastService, AuthService, LoadingService, AuthGuard, RoleGuard } from "./app.services/export.app.servies";
+import { FitnessClassPageModule } from './fitness-class/fitness-class.module';
+//import { FitnessClassesCalendarPageModule } from './fitness-classes-calendar/fitness-classes-calendar.module';
+import { LookupsPageModule } from './lookups/lookups.module';
 //import { NgCalendarModule } from 'ionic2-calendar'; this needs to be replaced
 
 @NgModule({
@@ -39,6 +42,9 @@ import { ToastService, AuthService, LoadingService } from "./app.services/export
     imports: [
         BrowserModule,
         IonicModule.forRoot(),
+        FitnessClassPageModule,
+        //FitnessClassesCalendarPageModule,
+        LookupsPageModule,
         AppRoutingModule,
         AngularFireModule.initializeApp(FIREBASE_CONFIG),
         AngularFireAuthModule,
@@ -47,6 +53,8 @@ import { ToastService, AuthService, LoadingService } from "./app.services/export
         StatusBar,
         SplashScreen,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+        AuthGuard,
+        RoleGuard,
         AnnouncementService,
         FitnessClassService,
         FitnessClassTemplateService,

@@ -3,5 +3,5 @@
 }
 
 .card-md p{
-    color: map-get($colors, grey);
+    color: var(--ion-color-grey);
 }

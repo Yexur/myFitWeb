@@ -1,6 +1,6 @@
 <ion-app>
     <ion-split-pane>
-        <ion-menu id="{{ adminId }}" side="left" [content]="content">
+        <ion-menu menuId="{{ adminId }}" side="start" contentId="content">
             <ion-header>
                 <ion-toolbar color="primary">
                     <ion-title>MyFit</ion-title>
@@ -37,7 +37,7 @@
             </ion-footer>
         </ion-menu>
 
-        <ion-menu id="{{ nonAdminId }}" side="left" [content]="content">
+        <ion-menu menuId="{{ nonAdminId }}" side="start" contentId="content">
             <ion-header>
                 <ion-toolbar color="primary">
                     <ion-title>Menu</ion-title>
@@ -74,6 +74,6 @@
                 </ion-toolbar>
             </ion-footer>
         </ion-menu>
+        <ion-router-outlet id='content' main></ion-router-outlet>
     </ion-split-pane>
-    <ion-router-outlet></ion-router-outlet>
 </ion-app>

@@ -37,7 +37,7 @@ export class AccountPopOverComponent implements OnInit {
             if(!results){
                 this.toastService.toastUnAuthorized();
             }
-        }) );
+        }));
 
         this.close();
     }

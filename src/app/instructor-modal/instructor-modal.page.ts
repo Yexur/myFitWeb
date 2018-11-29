@@ -37,8 +37,8 @@ export class InstructorModalPage implements OnInit {
         this.submitAttempt = true;
 
         if(this.instructorForm.valid) {
-            let loader = await this.loadingService.loader();
-            loader.present().then(() => {
+            const loader = await this.loadingService.loader();
+            await loader.present().then(() => {
                 this.instructor.instructorFirstName = this.instructorForm.controls.instructorFirstName.value;
                 this.instructor.instructorLastName = this.instructorForm.controls.instructorLastName.value;
                 this.instructorService.updateInstructor(this.instructor);

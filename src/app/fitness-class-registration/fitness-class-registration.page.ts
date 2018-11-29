@@ -43,8 +43,8 @@ export class FitnessClassRegistrationPage implements OnInit {
     }
 
     async loadView() {  //fix this not the right lifecycle method
-        let loader = await this.loadingService.loader();
-        loader.present().then(() => {
+        const loader = await this.loadingService.loader();
+        await loader.present().then(() => {
             this.fitnessClassesRegistrations =
                 this.fitnessClassService.getFitnessClassWithRegistrations(this.fitnessClass);
             loader.dismiss();
@@ -53,8 +53,8 @@ export class FitnessClassRegistrationPage implements OnInit {
 
     async updateAttended(fitnessClassesRegistration: FitnessClassRegistrationModel){
         if (this.fitnessClass.dateOfClass <= this.currentDate) {
-            let loader = await this.loadingService.loader();
-            loader.present().then(() => {
+            const loader = await this.loadingService.loader();
+            await loader.present().then(() => {
                 this.fitnessClassService.updateAttendanceByAdmin(this.fitnessClass, fitnessClassesRegistration);
                 loader.dismiss();
             });

@@ -1,5 +1,11 @@
 <ion-list>
-    <button ion-item (click)="menuEdit($event)">Edit</button>
-    <button ion-item (click)="menuCancel($event)">Cancel</button>
-    <button ion-item (click)="menuDelete($event)">Delete</button>
+    <ion-item (click)="menuEdit($event)">
+        <ion-label>Edit</ion-label>
+    </ion-item>
+    <ion-item (click)="menuCancel($event)">
+        <ion-label>Cancel</ion-label>
+    </ion-item>
+    <ion-item (click)="menuDelete($event)">
+        <ion-label>Delete</ion-label>
+    </ion-item>
 </ion-list>

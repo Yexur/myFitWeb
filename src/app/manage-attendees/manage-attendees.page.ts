@@ -30,8 +30,8 @@ export class ManageAttendeesPage implements OnInit {
     }
 
     async search() {
-        let loader = await this.loadingService.loader();
-        loader.present().then(() => {
+        const loader = await this.loadingService.loader();
+        await loader.present().then(() => {
             this.manageAttendeesService.getFitnessClassesByParams
             (
                 this.fromDate,

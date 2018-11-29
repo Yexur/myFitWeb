@@ -1,5 +1,5 @@
 .inactive {
-    color: map-get($colors, greyInactive);
+    color: var(--ion-color-greyInactive);
     opacity: .4;
     pointer-events: none;
 }

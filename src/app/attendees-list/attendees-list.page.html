@@ -1,16 +1,18 @@
 <ion-header>
     <ion-toolbar color="primary">
         <ion-title>Attendees</ion-title>
-        <ion-buttons end>
-            <button ion-button clear icon-only (click)="closeModal()">
+        <ion-buttons slot="primary">
+            <ion-button fill="clear" icon-only (click)="closeModal()">
                 <ion-icon color="grey" name="md-close"></ion-icon>
-            </button>
+            </ion-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
     <ion-row>
-        <ion-item *ngFor="let person of people | async">{{ person.displayName }}</ion-item>
+        <ion-item *ngFor="let person of people | async">
+            <ion-label>{{ person.displayName }}</ion-label>
+        </ion-item>
     </ion-row>
 </ion-content>

@@ -61,8 +61,8 @@ export class FitnessClassModalPage implements OnInit {
         this.submitAttempt = true;
 
         if(this.fitnessClassForm.valid) {
-            let loader = await this.loadingService.loader();
-            loader.present().then(() => {
+            const loader = await this.loadingService.loader();
+            await loader.present().then(() => {
                 let start = DateUtils.convertMomentToTimeString(moment(this.fitnessClassForm.controls.startTime.value));
                 let end = DateUtils.convertMomentToTimeString(moment(this.fitnessClassForm.controls.endTime.value));
 

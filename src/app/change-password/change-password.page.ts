@@ -25,12 +25,12 @@ export class ChangePasswordPage implements OnInit {
 
     async changePassword(){
         if(this.changePasswordData.newPassword !== this.changePasswordData.retypeNewPassword) {
-            let alert = await this.alertCtrl.create({
+            const alert = await this.alertCtrl.create({
                 header: 'Error',
                 message: 'Your password and your re-entered password does not match each other.',
                 buttons: ['OK']
             });
-            alert.present();
+            await alert.present();
             return;
         }
 

@@ -1,10 +1,12 @@
 <ion-header>
-    <ion-navbar color="primary">
-        <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-        </button>
+    <ion-toolbar color="primary">
+        <ion-menu-toggle>
+            <ion-button>
+                <ion-icon name="menu"></ion-icon>
+            </ion-button>
+        </ion-menu-toggle>
         <ion-title>Fitness Classes</ion-title>
-    </ion-navbar>
+    </ion-toolbar>
 </ion-header>
 <ion-content>
     <ion-list *ngIf="isAdmin" class="padding">
@@ -19,8 +21,8 @@
         <ion-item>
             <ion-label>Include Cancelled</ion-label>
             <ion-checkbox (click)="toggleShowCancelled()"checked={{includeCancelled}}></ion-checkbox>
-            <button ion-button item-end (click)="search()">Search</button>
-            <button ion-button item-end (click)="clearSearch()">Clear</button>
+            <ion-button item-end (click)="search()">Search</ion-button>
+            <ion-button item-end (click)="clearSearch()">Clear</ion-button>
         </ion-item>
     </ion-list>
 
@@ -34,7 +36,7 @@
 
     <ion-grid>
         <ion-row>
-            <ion-col *ngFor="let fitnessClass of fitnessClasses | async" col-12 col-md-6 col-lg-6>
+            <ion-col *ngFor="let fitnessClass of fitnessClasses | async" size="12" size-md="6" size-lg="6">
                 <ion-card>
                     <ion-card-header [color]="!fitnessClass.cancelled ? 'secondaryDark' : 'greyInactive'">
                         {{ fitnessClass.fitnessClassName }}
@@ -75,36 +77,36 @@
                         </ion-list>
                     </ion-card-content>
                     <ion-item [color]="!fitnessClass.cancelled ? 'secondaryDark' : 'greyInactive'">
-                        <button ion-button icon-left clear item-end
+                        <ion-button slot="start" fill="clear" item-end
                             (click)="cancel(fitnessClass)"
                             *ngIf="(isAdmin && !fitnessClass.cancelled &&
                                 (fitnessClass.dateOfClass >= currentDate ||
                                 (fitnessClass.dateOfClass <= currentDate && !fitnessClass.hasRegistrations) ))">
                             <ion-icon name="trash"></ion-icon>
                             Cancel
-                        </button>
-                        <button ion-button icon-left clear item-end
+                        </ion-button>
+                        <ion-button slot="start" fill="clear" item-end
                             (click)="openEditModal(fitnessClass)" *ngIf="(isAdmin && !fitnessClass.hasRegistrations)">
                             <ion-icon name="cog"></ion-icon>
                             Edit
-                        </button>
-                        <button ion-button icon-left clear item-end
+                        </ion-button>
+                        <ion-button slot="start" fill="clear" item-end
                             (click)="openCopyModal(fitnessClass)" *ngIf="isAdmin">
                             <ion-icon name="copy"></ion-icon>
                             Copy
-                        </button>
-                        <button ion-button icon-left clear item-end
+                        </ion-button>
+                        <ion-button slot="start" fill="clear" item-end
                             (click)="openRegistrationList(fitnessClass)"
                             *ngIf="(isAdmin && fitnessClass.hasRegistrations)">
                             <ion-icon name="eye"></ion-icon>
                             View Registrations
-                        </button>
-                        <button ion-button icon-left clear item-end
+                        </ion-button>
+                        <ion-button slot="start" fill="clear" item-end
                             (click)="registerForClass(fitnessClass)"
                             *ngIf="(fitnessClass.remainingCapacity > 0 && fitnessClass.dateOfClass >= currentDate && !fitnessClass.cancelled)">
                             <ion-icon name="clipboard"></ion-icon>
                             Register
-                        </button>
+                        </ion-button>
                     </ion-item>
                 </ion-card>
             </ion-col>

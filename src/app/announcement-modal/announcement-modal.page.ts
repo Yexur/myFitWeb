@@ -35,8 +35,8 @@ export class AnnouncementModalPage implements OnInit {
         this.submitAttempt = true;
 
         if(this.announcementForm.valid) {
-            let loader = await this.loadingService.loader();
-            loader.present().then(() => {
+            const loader = await this.loadingService.loader();
+            await loader.present().then(() => {
                 this.announcement.title = this.announcementForm.controls.announcementTitle.value;
                 this.announcement.comment = this.announcementForm.controls.announcementComment.value;
                 this.announcementService.updateAnnouncement(this.announcement);

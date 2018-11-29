@@ -9,16 +9,16 @@ export class LoadingService {
     constructor (private loadingCntrl: LoadingController){
     }
 
-    loader(){
-        return this.loadingCntrl.create({
+    async loader(): Promise<HTMLIonLoadingElement>{
+        return await this.loadingCntrl.create({
             message: 'Please wait...',
             spinner: "bubbles"
         });
     }
 
-    loaderWithMessage(message: string){
+    async loaderWithMessage(message: string): Promise<HTMLIonLoadingElement>{
         if (message != null && message != ""){
-            return this.loadingCntrl.
+            return await this.loadingCntrl.
             create({
                 message: message,
                 spinner: "bubbles"

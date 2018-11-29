@@ -1,9 +1,3 @@
-add in the menu control
-fix routing
-add the auth guard
-fix all the nav params part of routing
-fix the old life cycle events they no longer exist in ionic 4
-run the linter and fix all html elements
 add the styling to the correct files and fix the elements
 test functionaity (db and work flow)
 fix errors

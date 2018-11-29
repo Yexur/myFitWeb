@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { ToastService } from '../app.services/export.app.servies';
+import { ToastService } from '../app.services/toast.service';
 import { AlertController, Events } from "@ionic/angular";
 import { Observable, BehaviorSubject, of as observableOf } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -61,7 +61,7 @@ export class AuthService {
             this.toastService.toastWelcome(displayName);
         })
         .catch(async err => {  //change to a toaster error
-            let alert = await this.alertCtrl.create({
+            const alert = await this.alertCtrl.create({
                 header: 'Error',
                 message: err.message,
                 buttons: ['OK']
@@ -118,7 +118,7 @@ export class AuthService {
             this.toastService.toastEmailSent(email);
         }).catch(async err => { //change to a toast ererror
             if(err.code === 'auth/invalid-email'){
-                let alert = await this.alertCtrl.create({
+                const alert = await this.alertCtrl.create({
                     header: 'Error',
                     message: err.message,
                     buttons: ['OK']

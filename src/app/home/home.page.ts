@@ -30,8 +30,8 @@ export class HomePage {
 
     async loadView() {
         this.isAdmin = this.authService.isAdmin();
-        let loader = await this.loadingService.loader();
-        loader.present().then(() => {
+        const loader = await this.loadingService.loader();
+        await loader.present().then(() => {
             this.announcements = this.announcementService.getAnnoucements();
             loader.dismiss();
         });

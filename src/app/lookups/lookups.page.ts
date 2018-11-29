@@ -41,8 +41,8 @@ export class LookupsPage implements OnInit {
     }
 
     async loadView() {
-        let loader = await this.loadingService.loader();
-        loader.present().then(() => {
+        const loader = await this.loadingService.loader();
+        await loader.present().then(() => {
             this.instructors = this.instructorService.getInstructors();
             this.locations = this.locationService.getLocations();
             this.fitnessClassTemplates = this.fitnessClassTemplateService.getFitnessClassTemplates();
@@ -67,7 +67,7 @@ export class LookupsPage implements OnInit {
     }
 
     private async createSmallModal(page: any, model: any){
-        let modal = await this.modalCtrl.create({
+        const modal = await this.modalCtrl.create({
             component: page,
             componentProps: {
                 model: model
@@ -79,7 +79,7 @@ export class LookupsPage implements OnInit {
     }
 
     private async createLargeModal(page: any, model: any){
-        let modal = await this.modalCtrl.create({
+        const modal = await this.modalCtrl.create({
             component: page,
             componentProps: {
                 model: model

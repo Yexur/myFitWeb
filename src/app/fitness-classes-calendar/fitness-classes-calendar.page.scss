@@ -10,7 +10,7 @@
 
 .calendar {
     .monthview-datetable {
-        background-color: map-get($colors, white);
+        background-color: var(--ion-color-light);
 
         thead {
             text-transform: uppercase;
@@ -37,7 +37,7 @@
         }
 
         .cancelled {
-            color: $danger;
+            color: var(--ion-color-danger);
         }
 
         .header-more[clear] {
@@ -54,6 +54,6 @@
             margin-bottom: 0;
         }
 
-        p { color: map-get($colors, grey); }
+        p { color: var(--ion-color-grey); }
     }
 }

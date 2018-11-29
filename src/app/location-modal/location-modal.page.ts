@@ -38,8 +38,8 @@ export class LocationModalPage implements OnInit {
         this.submitAttempt = true;
 
         if(this.locationForm.valid) {
-            let loader = await this.loadingService.loader();
-            loader.present().then(() => {
+            const loader = await this.loadingService.loader();
+            await loader.present().then(() => {
                 this.location.locationName = this.locationForm.controls.locationName.value;
                 this.locationService.updateLocation(this.location);
                 loader.dismiss();

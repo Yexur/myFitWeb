@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ToastService } from '../app.services/toast.service';
 import { AlertController, Events } from "@ionic/angular";
-import { Observable, BehaviorSubject, of as observableOf } from 'rxjs';
+import { BehaviorSubject, of as observableOf } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { UserModel } from "../models/export.models";
 import { UserService } from "../api.services/user.service";

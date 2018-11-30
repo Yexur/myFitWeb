@@ -18,6 +18,12 @@ ion-grid {
 }
 
 ion-row{
-    display: flex;
-    align-self: center;
+    justify-content: center;
+    align-items: center;
+}
+
+ion-col{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
 }

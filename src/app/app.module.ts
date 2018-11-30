@@ -30,6 +30,7 @@ import { ToastService, AuthService, LoadingService, AuthGuard, RoleGuard } from 
 import { FitnessClassPageModule } from './fitness-class/fitness-class.module';
 //import { FitnessClassesCalendarPageModule } from './fitness-classes-calendar/fitness-classes-calendar.module';
 import { LookupsPageModule } from './lookups/lookups.module';
+import { HomePageModule } from './home/home.module';
 //import { NgCalendarModule } from 'ionic2-calendar'; this needs to be replaced
 
 @NgModule({
@@ -45,6 +46,7 @@ import { LookupsPageModule } from './lookups/lookups.module';
         FitnessClassPageModule,
         //FitnessClassesCalendarPageModule,
         LookupsPageModule,
+        HomePageModule,
         AppRoutingModule,
         AngularFireModule.initializeApp(FIREBASE_CONFIG),
         AngularFireAuthModule,

@@ -31,26 +31,6 @@ export class AppComponent {
         private router: Router
     )
     {
-        events.subscribe('user:Login', () => {
-            if (this.authService.isAdmin()) {
-                this.menuCtrl.enable(true, this.adminId);
-                this.menuCtrl.enable(false, this.nonAdminId);
-            } else {
-                this.menuCtrl.enable(false, this.adminId);
-                this.menuCtrl.enable(true, this.nonAdminId);
-            }
-
-            this.openPage('/home');
-        });
-
-        events.subscribe('user:LogOut', () => {
-            this.menuCtrl.enable(false, this.adminId);
-            this.menuCtrl.enable(false, this.nonAdminId);
-            this.openPage('/login');
-        });
-
-        this.initializeApp();
-
         this.adminPages = [
             { title: 'Home', component: '/home', icon: 'home' },
             { title: 'Calendar', component: '/fitness-classes-calendar', icon: 'calendar' },
@@ -64,12 +44,32 @@ export class AppComponent {
             { title: 'Calendar', component: '/fitness-classes-calendar', icon: 'calendar' },
             { title: 'My Classes', component: '/registration', icon: 'star' }
         ];
+
+        this.initializeApp();
     }
 
     initializeApp() {
         this.platform.ready().then(() => {
         this.statusBar.styleDefault();
         this.splashScreen.hide();
+        });
+
+        this.authService.authenticationState.subscribe(state => {
+            if(state){
+                this.openPage('/home');
+                if (this.authService.isAdmin()) {
+                    this.menuCtrl.enable(true, this.adminId);
+                    this.menuCtrl.enable(false, this.nonAdminId);
+                } else {
+                    this.menuCtrl.enable(false, this.adminId);
+                    this.menuCtrl.enable(true, this.nonAdminId);
+                }
+            }
+            else{
+                this.menuCtrl.enable(false, this.adminId);
+                this.menuCtrl.enable(false, this.nonAdminId);
+                this.openPage('/login');
+            }
         });
     }
 

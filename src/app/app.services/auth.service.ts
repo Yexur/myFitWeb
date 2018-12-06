@@ -1,51 +1,44 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ToastService } from '../app.services/toast.service';
-import { AlertController, Events } from "@ionic/angular";
+import { AlertController } from "@ionic/angular";
 import { BehaviorSubject, of as observableOf } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import { UserModel } from "../models/export.models";
 import { UserService } from "../api.services/user.service";
 import * as firebase from 'firebase/app';
+import { Platform } from '@ionic/angular'
+import { UserModel } from "../models/export.models";
+import { switchMap } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
 
+    public authenticationState = new BehaviorSubject(false);
     public user: BehaviorSubject<UserModel> = new BehaviorSubject(null);
 
     constructor (
         public afAuth: AngularFireAuth,
-        public events: Events,
         private alertCtrl: AlertController,
         private toastService: ToastService,
-        private userService: UserService
+        private userService: UserService,
+        private platform: Platform
     )
     {
-        this.afAuth.authState.pipe(switchMap(auth => {
-            if (auth){
-                return userService.getUserByUID(auth);
-            } else {
-                return observableOf(null);
-            }
-        }))
-        .subscribe(user => {
-            this.user.next(user);
-            if (user){
-                events.publish('user:Login');
-            } else {
-                events.publish('user:LogOut');
-            }
+        this.platform.ready().then(() => {
+            this.checkAuthentication();
+            this.getUser();
         });
     }
 
     signInWithEmailAndPassword(email: string, password: string){
         this.afAuth.auth.signInWithEmailAndPassword(email, password)
         .then(auth => {
+            this.authenticationState.next(true);
             this.toastService.toastWelcome(auth.user.displayName);
         })
         .catch(err => {
+            this.authenticationState.next(false);
             this.toastService.toastInvalidCredentials();
         });
     }
@@ -58,15 +51,14 @@ export class AuthService {
                 photoURL: ""
             });
             this.userService.createNewUser(auth.user, displayName);
+            this.authenticationState.next(true);
             this.toastService.toastWelcome(displayName);
         })
         .catch(async err => {  //change to a toaster error
-            const alert = await this.alertCtrl.create({
-                header: 'Error',
-                message: err.message,
-                buttons: ['OK']
-            });
-            await alert.present();
+            this.authenticationState.next(false);
+            this.toastService.toastWithMessage(
+                "Failed to create account please try again or contact support at SETUP SDUPPORT EMAIL"
+            );
         });
     }
 
@@ -87,6 +79,7 @@ export class AuthService {
                     this.toastService.toastWithMessage("Unable to change display name");
                 });
             }).catch( () => {
+                this.authenticationState.next(false);
                 this.toastService.toastInvalidCredentials();
             });
         }
@@ -104,10 +97,12 @@ export class AuthService {
                     this.toastService.toastWithMessage("Password changed");
                 })
                 .catch( () => {
+                    this.authenticationState.next(false);
                     this.toastService.toastWithMessage("Unable to change password");
                 });
             })
             .catch( () => {
+                this.authenticationState.next(false);
                 this.toastService.toastInvalidCredentials();
             });
         }
@@ -116,14 +111,11 @@ export class AuthService {
     resetUsersPassword(email: string){
         this.afAuth.auth.sendPasswordResetEmail(email).then( () => {
             this.toastService.toastEmailSent(email);
-        }).catch(async err => { //change to a toast ererror
+            this.authenticationState.next(false);
+        }).catch(async err => {
+            this.authenticationState.next(false);
             if(err.code === 'auth/invalid-email'){
-                const alert = await this.alertCtrl.create({
-                    header: 'Error',
-                    message: err.message,
-                    buttons: ['OK']
-                });
-                await alert.present();
+                this.toastService.toastWithMessage(err.message);
             } else {
                 this.toastService.toastEmailSent(email);
             }
@@ -131,7 +123,7 @@ export class AuthService {
     }
 
     isAuthenticated(): boolean {
-        return this.user.value.id ? true : false;
+        return this.authenticationState.value;
     }
 
     isAdmin(): boolean {
@@ -143,5 +135,27 @@ export class AuthService {
 
     signOut(){
         this.afAuth.auth.signOut();
+    }
+
+
+    //TO DO - FIX THIS TO BE ONLY ONE BEHAVIOR SUBJECT
+    //ADD THE ROLES FOR THIS USR INTO AN ARRAY AND THEN CHECK FOR AN ADMIN ROLE IN THAT
+    //PRIVATE PROPERTY
+    private checkAuthentication() {
+        if (this.afAuth.auth.currentUser){
+            this.authenticationState.next(true);
+        }
+    }
+
+    private getUser(){
+        this.afAuth.authState.pipe(switchMap(auth => {
+            if (auth){
+                return this.userService.getUserByUID(auth);
+            } else{
+                return observableOf(null);
+            }
+        })).subscribe(user => {
+            this.user.next(user);
+        });
     }
 }

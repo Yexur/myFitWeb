@@ -24,7 +24,7 @@ export class AnnouncementModalPage implements OnInit {
     )
     {
         this.announcement = navParams.get('announcement');
-        this.title = (this.announcement.title ? this.announcement.title : "Add New Announcement");
+        this.title = (this.announcement.title !== '' ? this.announcement.title : "Add New Announcement");
         this.announcementForm = this.buildValidators();
     }
 

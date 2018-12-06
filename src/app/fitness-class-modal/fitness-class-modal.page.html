@@ -102,8 +102,7 @@
                 <ion-label position="floating">Capacity</ion-label>
                 <ion-input
                     type="number"
-                    formControlName="capacity">
-                    {{ fitnessClass.capacity }}
+                    formControlName="capacity" value="{{ fitnessClass.capacity }}">
                 </ion-input>
             </ion-item>
             <ion-item *ngIf="!fitnessClassForm.controls.capacity.valid &&
@@ -115,8 +114,9 @@
                 <ion-label position="floating">Description</ion-label>
                 <ion-textarea
                     formControlName="description"
-                    rows="10" type="textarea" autocomplete="true">
-                </ion-textarea> {{ fitnessClass.description }}
+                    rows="10" type="textarea" autocomplete="true"
+                    value="{{ fitnessClass.description }}">
+                </ion-textarea>
             </ion-item>
             <ion-item *ngIf="!fitnessClassForm.controls.description.valid &&
                 (fitnessClassForm.controls.description.dirty || submitAttempt)">

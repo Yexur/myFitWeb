@@ -11,8 +11,8 @@
                     <ion-label position="stacked">Fitness Class</ion-label>
                     <ion-input type="text"
                         formControlName="fitnessClassName"
-                        placeholder="Please Select a Fitness Class">
-                        {{ fitnessClassTemplate.fitnessClassName }}
+                        placeholder="Please Select a Fitness Class"
+                        value="{{ fitnessClassTemplate.fitnessClassName }}">
                     </ion-input>
                 </ion-item>
                 <ion-item *ngIf="!fitnessClassTemplateForm.controls.fitnessClassName.valid &&
@@ -84,8 +84,8 @@
                     <ion-label position="floating">Capacity</ion-label>
                     <ion-input
                         type="number"
-                        formControlName="capacity">
-                        {{ fitnessClassTemplate.capacity }}
+                        formControlName="capacity"
+                        value="{{ fitnessClassTemplate.capacity }}">
                     </ion-input>
                 </ion-item>
                 <ion-item *ngIf="!fitnessClassTemplateForm.controls.capacity.valid &&
@@ -97,8 +97,9 @@
                     <ion-label position="floating">Description</ion-label>
                     <ion-textarea
                         formControlName="description"
-                        rows="10" type="textarea" autocomplete="true">
-                    </ion-textarea> {{ fitnessClassTemplate.description }}
+                        rows="10" type="textarea" autocomplete="true"
+                        value="{{ fitnessClassTemplate.description }}">
+                    </ion-textarea>
                 </ion-item>
                 <ion-item *ngIf="!fitnessClassTemplateForm.controls.description.valid &&
                     (fitnessClassTemplateForm.controls.description.dirty || submitAttempt)">

@@ -63,8 +63,16 @@ export class HomePage {
     }
 
     async openAddModal() {
+        let announcement: AnnouncementModel = {
+            title: "",
+            comment: ""
+        };
+
         const modal = await this.modalCtrl.create({
             component: AnnouncementModalPage,
+            componentProps:{
+                announcement: announcement
+            },
             cssClass:  'smallModal',
             backdropDismiss: false
         });

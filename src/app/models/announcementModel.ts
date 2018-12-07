@@ -1,9 +1,9 @@
 export interface AnnouncementData {
     comment: string;
-    created: number;
+    created?: number;
     title: string;
 }
 
 export interface AnnouncementModel extends AnnouncementData {
-    id: string;
+    id?: string;
 }

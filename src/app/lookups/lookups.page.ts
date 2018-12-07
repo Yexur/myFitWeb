@@ -51,15 +51,25 @@ export class LookupsPage implements OnInit {
     }
 
     openAddInstructorModal(){
-        this.createSmallModal(InstructorModalPage, null);
+        let instructor: InstructorModel = {
+            instructorFirstName: ""
+        };
+        this.createSmallModal(InstructorModalPage, instructor);
     }
 
     openAddLocationModal() {
-        this.createSmallModal(LocationModalPage, null);
+        let location: LocationModel = {
+            locationName: ""
+        };
+        this.createSmallModal(LocationModalPage, location);
     }
 
     openAddFitnessClassTemplateModal() {
-        this.createLargeModal(FitnessClassTemplateModalPage, null);
+        let fitnessClassTemplate: FitnessClassTemplateModel = {
+            fitnessClassName: "",
+            capacity: 0
+        };
+        this.createLargeModal(FitnessClassTemplateModalPage, fitnessClassTemplate);
     }
 
     openEditFitnessClassTemplateModal(fitnessClassTemplateModel : FitnessClassTemplateModel){

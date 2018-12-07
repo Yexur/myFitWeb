@@ -11,8 +11,8 @@
                 <ion-label position="floating">Title</ion-label>
                 <ion-input
                     formControlName="announcementTitle"
-                    type="text" clearInput autocomplete="true">
-                        {{ announcement.title }}
+                    type="text" clearInput autocomplete="on"
+                    value="{{ announcement.title }}">
                 </ion-input>
             </ion-item>
 
@@ -25,8 +25,7 @@
                 <ion-label position="floating">Comment</ion-label>
                 <ion-textarea
                     formControlName="announcementComment"
-                    rows="10" type="textarea" autocomplete="true">
-                        {{ announcement.comment }}
+                    rows="10" type="textarea" value="{{ announcement.comment }}">
                 </ion-textarea>
             </ion-item>
 

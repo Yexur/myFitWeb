@@ -9,5 +9,5 @@ export interface FitnessClassTemplateData {
 }
 
 export interface FitnessClassTemplateModel extends FitnessClassTemplateData {
-    id: string;
+    id?: string;
 }

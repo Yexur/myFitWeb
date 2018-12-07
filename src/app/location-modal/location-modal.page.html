@@ -11,17 +11,17 @@
                 <ion-label position="floating">Location</ion-label>
                 <ion-input
                     formControlName='locationName'
-                    type="text" clearInput autocomplete="true">
-                        {{ location.locationName }}
+                    type="text" clearInput autocomplete="true"
+                    value="{{ location.locationName }}">
                 </ion-input>
             </ion-item>
 
             <ion-item *ngIf="!locationForm.controls.locationName.valid  &&
                 (locationForm.controls.locationName.dirty || submitAttempt)">
-                <p>Please enter a valid location.</p>
+                <label>Please enter a valid location.</label>
             </ion-item>
         </form>
-        <ion-item>
+        <ion-toolbar>
             <ion-buttons slot="secondary">
                 <ion-button (click)="dismiss()">
                     <ion-text>
@@ -34,6 +34,6 @@
                     </ion-text>
                 </ion-button>
             </ion-buttons>
-        </ion-item>
+        </ion-toolbar>
     </ion-list>
 </ion-content>

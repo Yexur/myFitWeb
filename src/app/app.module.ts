@@ -39,7 +39,7 @@ import { HomePageModule } from './home/home.module';
         AccountPopOverComponent,
         FitnessClassMenuComponent
     ],
-    entryComponents: [],
+    entryComponents: [AccountPopOverComponent],
     imports: [
         BrowserModule,
         IonicModule.forRoot(),
@@ -50,7 +50,8 @@ import { HomePageModule } from './home/home.module';
         AppRoutingModule,
         AngularFireModule.initializeApp(FIREBASE_CONFIG),
         AngularFireAuthModule,
-        AngularFirestoreModule.enablePersistence()],
+        AngularFirestoreModule //add in enablepersistence when we know how it works
+    ],
     providers: [
         StatusBar,
         SplashScreen,

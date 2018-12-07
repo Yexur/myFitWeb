@@ -73,7 +73,7 @@ export class HomePage {
             componentProps:{
                 announcement: announcement
             },
-            cssClass:  'smallModal',
+            cssClass:  'largeModal',
             backdropDismiss: false
         });
         await modal.present();
@@ -85,7 +85,7 @@ export class HomePage {
             componentProps:{
                 announcement: announcement
             },
-            cssClass:  'smallModal',
+            cssClass:  'largeModal',
             backdropDismiss: false
         });
         await modal.present();

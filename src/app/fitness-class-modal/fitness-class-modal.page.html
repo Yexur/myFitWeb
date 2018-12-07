@@ -53,7 +53,7 @@
             </ion-item>
             <ion-item *ngIf="!fitnessClassForm.controls.location.valid &&
                 (fitnessClassForm.controls.location.dirty || submitAttempt)">
-                <p>Please enter a valid location.</p>
+                <label>Please enter a valid location.</label>
             </ion-item>
 
             <ion-item>
@@ -107,7 +107,7 @@
             </ion-item>
             <ion-item *ngIf="!fitnessClassForm.controls.capacity.valid &&
                 (fitnessClassForm.controls.capacity.dirty || submitAttempt)">
-                <p>Please enter a valid capacity.</p>
+                <label>Please enter a valid capacity.</label>
             </ion-item>
 
             <ion-item>
@@ -120,10 +120,10 @@
             </ion-item>
             <ion-item *ngIf="!fitnessClassForm.controls.description.valid &&
                 (fitnessClassForm.controls.description.dirty || submitAttempt)">
-                <p>Please enter a valid description.</p>
+                <label>Please enter a valid description.</label>
             </ion-item>
         </form>
-        <ion-item>
+        <ion-toolbar>
             <ion-buttons slot="secondary">
                 <ion-button (click)="dismiss()">
                     <ion-text>
@@ -136,6 +136,6 @@
                     </ion-text>
                 </ion-button>
             </ion-buttons>
-        </ion-item>
+        </ion-toolbar>
     </ion-list>
 </ion-content>

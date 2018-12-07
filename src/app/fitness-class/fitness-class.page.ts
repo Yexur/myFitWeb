@@ -35,7 +35,7 @@ export class FitnessClassPage implements OnInit {
     ngOnInit() {
     }
 
-    //TODO:  THIS PAGE WILL BE REMOVED WHEN ALL OF THE FUNCTIONALITY HAS BEEN REMOVED
+    //TODO:  THIS PAGE WILL BE REMOVED WHEN ALL OF THE FUNCTIONALITY HAS BEEN REMOVED to the calendar
 
     async ionViewDidLoad() {
         this.isAdmin = this.authService.isAdmin();

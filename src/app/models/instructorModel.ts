@@ -4,5 +4,5 @@ export interface InstructorData {
 }
 
 export interface InstructorModel extends InstructorData {
-    id: string;
+    id?: string;
 }

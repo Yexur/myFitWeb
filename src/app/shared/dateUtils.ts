@@ -1,5 +1,6 @@
 import * as moment from 'moment';
 import {Moment} from "moment";
+import { Timestamp } from 'rxjs/internal/operators/timestamp';
 
 export module DateUtils {
     export function getCurrentDate(hours: number = 0): Date {
@@ -18,17 +19,8 @@ export module DateUtils {
     }
 
     export function convertStringToDate(dateObj: string): Date {
-        let dateParts = dateObj.split('-');
-
-        if (dateParts.length !== 3){
-            return new Date();
-        }
-
-        let year = parseInt(dateParts[0]);
-        let monthNumber = parseInt(dateParts[1]);
-        let dayNumber = parseInt(dateParts[2]);
-
-        return new Date(year, monthNumber -1, dayNumber);
+        let convertedDateObj: Moment = moment(dateObj);
+        return convertedDateObj.toDate();
     }
 
     export function convertMomentToDateString(date: Moment): string {

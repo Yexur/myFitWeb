@@ -30,12 +30,12 @@
                         <p>{{ announcement.comment }}</p>
                     </ion-card-content>
                     <ion-item>
-                        <ion-button slot="start" fill="clear" item-end color="secondary"
+                        <ion-button slot="start" fill="clear"
                             (click)="delete(announcement)" *ngIf="isAdmin">
                             <ion-icon name="trash"></ion-icon>
                             Delete
                         </ion-button>
-                        <ion-button slot="start" fill="clear" item-end color="secondary"
+                        <ion-button slot="start" fill="clear"
                             (click)="openEditModal(announcement)" *ngIf="isAdmin">
                             <ion-icon name="cog"></ion-icon>
                             Edit

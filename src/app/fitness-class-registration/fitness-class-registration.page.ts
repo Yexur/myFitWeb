@@ -5,6 +5,7 @@ import { FitnessClassRegistrationModel, FitnessClassModel } from '../models/expo
 import { Observable } from 'rxjs';
 import { FitnessClassService } from '../api.services/export.api';
 import { DateUtils } from '../shared/export.shared';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-fitness-class-registration',
@@ -36,7 +37,7 @@ export class FitnessClassRegistrationPage implements OnInit {
 
         if (this.fitnessClass) {
             this.fitnessClassTitle = this.fitnessClass.fitnessClassName;
-            this.fitnessClassDate = this.fitnessClass.dateOfClass;
+            this.fitnessClassDate = moment(this.fitnessClass.dateOfClass).toDate();
         }
 
         this.loadView();
@@ -52,7 +53,7 @@ export class FitnessClassRegistrationPage implements OnInit {
     }
 
     async updateAttended(fitnessClassesRegistration: FitnessClassRegistrationModel){
-        if (this.fitnessClass.dateOfClass <= this.currentDate) {
+        if (moment(this.fitnessClass.dateOfClass) <= moment(this.currentDate) ) {
             const loader = await this.loadingService.loader();
             await loader.present().then(() => {
                 this.fitnessClassService.updateAttendanceByAdmin(this.fitnessClass, fitnessClassesRegistration);

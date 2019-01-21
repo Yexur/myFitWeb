@@ -61,7 +61,7 @@ export class ManageAttendeesPage implements OnInit {
                 })
             });
             this.showDateRangeHeader = true;
-            this.toDate = (!this.toDate) ? DateUtils.getCurrentDate(0).toString(): this.toDate;
+            this.toDate = (!this.toDate) ? DateUtils.getCurrentDate(0).toString() : this.toDate;
 
         }).then(() => {
             loader.dismiss();

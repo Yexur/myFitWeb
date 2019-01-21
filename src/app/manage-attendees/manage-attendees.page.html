@@ -4,26 +4,27 @@
     </ion-toolbar>
 </ion-header>
 <ion-content *ngIf="isAdmin">
-    <ion-list>
-        <ion-label class="date-title">Apply Date Range</ion-label>
-        <ion-item class="date-input inline">
+    <ion-list lines='none'>
+        <ion-item>
+            <ion-label class="date-title">Apply Date Range</ion-label>
+        </ion-item>
+
+        <ion-item>
             <ion-label>From:</ion-label>
-            <ion-datetime
+            <ion-datetime class="date-input inline"
                 displayFormat="MMM DD YYYY"
                 [(ngModel)]="fromDate">
             </ion-datetime>
-        </ion-item>
-        <ion-item class="date-input inline">
             <ion-label>To:</ion-label>
-            <ion-datetime
+            <ion-datetime class="date-input inline"
                 displayFormat="MMM DD YYYY"
                 [(ngModel)]="toDate">
             </ion-datetime>
+            <ion-buttons slot='end'>
+                <ion-button (click)="search()">Apply</ion-button>
+                <ion-button (click)="clearSearch()">Clear</ion-button>
+            </ion-buttons>
         </ion-item>
-        <ion-buttons slot='end' class="inline">
-            <ion-button (click)="search()" color="textOnPrimary">Apply</ion-button>
-            <ion-button (click)="clearSearch()" color="textOnPrimary">Clear</ion-button>
-        </ion-buttons>
     </ion-list>
     <ion-row *ngIf="showDateRangeHeader" class="date-range-header" text-center>
         <ion-label>{{ fromDate | date:'fullDate'}} - {{ toDate | date:'fullDate'}}</ion-label>

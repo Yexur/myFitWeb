@@ -4,6 +4,7 @@ import { RegistrationModel } from '../models/export.models';
 import { Observable } from 'rxjs';
 import { RegistrationService } from '../api.services/export.api';
 import { DateUtils } from '../shared/export.shared';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-registration',
@@ -37,7 +38,7 @@ export class RegistrationPage implements OnInit {
     }
 
     async cancel(registration: RegistrationModel) {
-        if (registration.dateOfClass >= this.currentDate) {
+        if (moment(registration.dateOfClass) >= moment(this.currentDate)) {
             const loader = await this.loadingService.loader();
             await loader.present().then(() => {
                 this.registrationService.cancelRegistration(registration, this.authService.user);
@@ -49,7 +50,7 @@ export class RegistrationPage implements OnInit {
     }
 
     async updateAttended(registration: RegistrationModel) {
-        if (registration.dateOfClass <= this.currentDate) {
+        if (moment(registration.dateOfClass) <= moment(this.currentDate)) {
             const loader = await this.loadingService.loader();
             await loader.present().then(() => {
                 this.registrationService.updateAttendance(registration, this.authService.user);

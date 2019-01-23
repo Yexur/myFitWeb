@@ -45,7 +45,7 @@ export class FitnessClassTemplateModalPage implements OnInit {
     {
         this.fitnessClassTemplate = navParams.get('model');
 
-        this.fitnessClassTemplateTitle = (this.fitnessClassTemplate.fitnessClassName
+        this.fitnessClassTemplateTitle = (this.fitnessClassTemplate.fitnessClassName !== ''
             ? this.fitnessClassTemplate.fitnessClassName
             : "Add New Fitness Class Template");
 

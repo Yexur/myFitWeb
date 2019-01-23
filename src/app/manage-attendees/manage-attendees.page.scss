@@ -1,12 +1,14 @@
 .date-title {
-    font-size: 1.8rem;
+    font-size: 1.2rem;
     font-weight: bold;
     padding-left: 2rem;
+    color: var(--ion-color-grey);
 }
 
 .date-input {
     width: 30%;
-    font-size: 1.5rem;
+    font-size: 1.0rem;
+    color: var(--ion-color-grey);
 }
 
 .inline {
@@ -16,7 +18,7 @@
 .date-range-header {
     padding: 2rem;
     background-color: var(--ion-color-headerGrey);
-    font-size: 1.7rem;
+    font-size: 1.5rem;
 }
 
 .row {
@@ -47,20 +49,20 @@
 }
 
 .class-name {
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     font-weight: bold;
     margin-bottom: 0;
 }
 
 .class-date {
     color:  var(--ion-color-grey);
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     margin-top: 0;
 }
 
 
 .display-name {
-    font-size: 1.5rem;
+    font-size: 1.0rem;
 }
 
 .attendee-row:nth-child(even), .attendee-row:nth-child(even) .item{
@@ -71,7 +73,7 @@
     background: var(--ion-color-light);
 }
 
-button[ion-button].not-attending-confirmed.button, button[ion-button].attending-confirmed.button {
+ion-button.not-attending-confirmed.button, ion-button.attending-confirmed.button {
     background-color: var(--ion-color-light);
     outline: var(--ion-color-secondary);
     border: 3px solid var(--ion-color-secondary);
@@ -79,7 +81,7 @@ button[ion-button].not-attending-confirmed.button, button[ion-button].attending-
     padding: 5px;
 }
 
-button[ion-button].not-attending-attended, button[ion-button].attending-not {
+ion-button.not-attending-attended, ion-button.attending-not {
     background: var(--ion-color-light);
     outline: none;
     border: none;

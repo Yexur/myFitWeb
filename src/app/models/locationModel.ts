@@ -3,5 +3,5 @@ export interface LocationData {
 }
 
 export interface LocationModel extends LocationData {
-    id: string;
+    id?: string;
 }

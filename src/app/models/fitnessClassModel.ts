@@ -1,8 +1,10 @@
+import { firestore } from "firebase";
+
 export interface FitnessClassData {
     description?: string;
     cancelled: boolean;
     capacity: number;
-    dateOfClass?: Date;
+    dateOfClass?: firestore.Timestamp;
     startTime?: string | Date;
     endTime?: string | Date;
     instructor?: string;

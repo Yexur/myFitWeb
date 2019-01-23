@@ -4,6 +4,7 @@ import { AuthGuard, RoleGuard } from './app.services/export.app.servies';
 import { FitnessClassPage } from './fitness-class/fitness-class.page';
 //import { FitnessClassesCalendarPage } from './fitness-classes-calendar/fitness-classes-calendar.page';
 import { LookupsPage } from './lookups/lookups.page';
+import { HomePage } from './home/home.page';
 
 const routes: Routes = [
     { path: '',
@@ -14,8 +15,14 @@ const routes: Routes = [
         loadChildren: './login/login.module#LoginPageModule'
     },
     { path: 'home',
-        loadChildren: './home/home.module#HomePageModule',
-        canActivate: [AuthGuard]  //add the annoucement modal as part of the children
+        component: HomePage,
+        canActivate: [AuthGuard],
+        children: [
+            { path: 'announcement-modal',
+                loadChildren: './announcement-modal/announcement-modal.module#AnnouncementModalPageModule',
+                canActivate: [RoleGuard]
+            }
+        ]
     },
     { path: 'change-display-name',
         loadChildren: './change-display-name/change-display-name.module#ChangeDisplayNamePageModule',

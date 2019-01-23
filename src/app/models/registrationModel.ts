@@ -1,9 +1,11 @@
+import { firestore } from "firebase";
+
 export interface RegistrationData {
     attended: boolean;
     created: number;
     fitnessClassId: string;
     waitListed: boolean;
-    dateOfClass?: Date;
+    dateOfClass?: firestore.Timestamp;
     startTime?: string | Date;
     endTime?: string | Date;
     instructor?: string;

@@ -27,7 +27,6 @@ export class ManageAttendeesService {
 
         let formatedFromDate = (!fromDate) ? DateUtils.getCurrentDate() : DateUtils.convertStringToDate(fromDate);
         let formatedToDate = (!toDate) ? DateUtils.getCurrentDate(23): DateUtils.convertStringToDate(toDate);
-
         let fitnessClassCollection: AngularFirestoreCollection<FitnessClassData>;
 
         fitnessClassCollection =
@@ -40,18 +39,6 @@ export class ManageAttendeesService {
             .where("hasRegistrations", "==", true)
         );
         return this.getClasses(fitnessClassCollection);
-    }
-
-    private getClasses(collection: AngularFirestoreCollection<FitnessClassData>): Observable<FitnessClassModel[]> {
-        return collection.snapshotChanges().pipe(map(fClasses => {
-            return  fClasses.map(fClass => {
-                const data = fClass.payload.doc.data() as FitnessClassData;
-                data.startTime = DateUtils.convertStringToTime(data.startTime.toString(), false);
-                data.endTime = DateUtils.convertStringToTime(data.endTime.toString(), false);
-                const id = fClass.payload.doc.id;
-                return {id, ...data};
-            });
-        }));
     }
 
     getAttendeesForClass(fitnessClassId: string): Observable<ManageAttendeesModel[]> {
@@ -71,6 +58,18 @@ export class ManageAttendeesService {
             return  attendees.map(attendee => {
                 const data = attendee.payload.doc.data() as ManageAttendeesData;
                 const id = attendee.payload.doc.id;
+                return {id, ...data};
+            });
+        }));
+    }
+
+    private getClasses(collection: AngularFirestoreCollection<FitnessClassData>): Observable<FitnessClassModel[]> {
+        return collection.snapshotChanges().pipe(map(fClasses => {
+            return  fClasses.map(fClass => {
+                const data = fClass.payload.doc.data() as FitnessClassData;
+                data.startTime = DateUtils.convertStringToTime(data.startTime.toString(), false);
+                data.endTime = DateUtils.convertStringToTime(data.endTime.toString(), false);
+                const id = fClass.payload.doc.id;
                 return {id, ...data};
             });
         }));

@@ -63,9 +63,17 @@ export class HomePage {
     }
 
     async openAddModal() {
+        let announcement: AnnouncementModel = {
+            title: "",
+            comment: ""
+        };
+
         const modal = await this.modalCtrl.create({
             component: AnnouncementModalPage,
-            cssClass:  'smallModal',
+            componentProps:{
+                announcement: announcement
+            },
+            cssClass:  'largeModal',
             backdropDismiss: false
         });
         await modal.present();
@@ -77,7 +85,7 @@ export class HomePage {
             componentProps:{
                 announcement: announcement
             },
-            cssClass:  'smallModal',
+            cssClass:  'largeModal',
             backdropDismiss: false
         });
         await modal.present();

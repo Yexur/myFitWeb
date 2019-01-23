@@ -1,24 +1,26 @@
 //Button styling
+:root{
+    ion-button{
+        color: var(--ion-color-secondary);
 
-button[ion-button].button, button[ion-button].bar-button {
-    background-color: var(--ion-color-secondary);
+        &:hover:not(.disable-hover) {
+            background-color: var(--ion-color-grey);
 
-    &:hover:not(.disable-hover) {
-        background-color: var(--ion-color-secondary);
-
-        ion-icon {
-            color: var(--ion-color-secondary);
+            ion-icon {
+                color: var(--ion-color-secondary);
+            }
         }
-    }
 
-    &[clear] {
-        background-color: transparent;
-        padding: 0 6px;
-        text-transform: capitalize;
-        font-weight: normal;
-
-        &:hover {
+        &[clear] {
             background-color: transparent;
+            padding: 0 6px;
+            text-transform: capitalize;
+            font-weight: normal;
+
+            &:hover {
+                background-color: transparent;
+            }
         }
     }
 }
+

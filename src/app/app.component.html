@@ -19,11 +19,13 @@
                         </ion-button>
                     </ion-item>
                     <ion-item>
-                        <ion-item menuClose *ngFor="let adminPage of adminPages"
-                            (click)="openPage(adminPage.component)">
-                            <ion-icon class="sideMenuIcon" name="{{adminPage.icon}}"></ion-icon>
-                            <ion-label>{{adminPage.title}}</ion-label>
-                        </ion-item>
+                        <ion-list>
+                            <ion-item *ngFor="let adminPage of adminPages"
+                                (click)="openPage(adminPage.component)">
+                                <ion-icon class="sideMenuIcon" name="{{adminPage.icon}}"></ion-icon>
+                                <ion-label>{{adminPage.title}}</ion-label>
+                            </ion-item>
+                        </ion-list>
                     </ion-item>
                 </ion-list>
             </ion-content>
@@ -56,11 +58,13 @@
                         </ion-button>
                     </ion-item>
                     <ion-item>
-                        <ion-item menuClose *ngFor="let nonAdminPage of nonAdminPages"
-                            (click)="openPage(nonAdminPage.component)">
-                            <ion-icon class="sideMenuIcon" name="{{nonAdminPage.icon}}"></ion-icon>
-                            <ion-label>{{nonAdminPage.title}}</ion-label>
-                        </ion-item>
+                        <ion-list>
+                            <ion-item *ngFor="let nonAdminPage of nonAdminPages"
+                                (click)="openPage(nonAdminPage.component)">
+                                <ion-icon class="sideMenuIcon" name="{{nonAdminPage.icon}}"></ion-icon>
+                                <ion-label>{{nonAdminPage.title}}</ion-label>
+                            </ion-item>
+                        </ion-list>
                     </ion-item>
                 </ion-list>
             </ion-content>

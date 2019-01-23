@@ -15,7 +15,6 @@ export class ManageAttendeesPage implements OnInit {
     public listOfClassAttendees: ListOfClassAttendeesModel[] = [];
     public fromDate: string;
     public toDate: string;
-    public currentDate: Date = DateUtils.getCurrentDate();
     public showDateRangeHeader: boolean = false;
 
     constructor(
@@ -27,6 +26,8 @@ export class ManageAttendeesPage implements OnInit {
 
     ngOnInit() {
         this.isAdmin = this.authService.isAdmin();
+        this.fromDate = DateUtils.getCurrentDate().toISOString();
+        this.toDate = DateUtils.getCurrentDate().toISOString();
     }
 
     async search() {
@@ -45,7 +46,7 @@ export class ManageAttendeesPage implements OnInit {
                     item.endTime = fClass.endTime.toString();
                     item.startTime = fClass.startTime.toString();
                     item.hasRegistrations = fClass.hasRegistrations;
-                    item.dateOfClass = fClass.dateOfClass;
+                    item.dateOfClass = fClass.dateOfClass.toDate();
                     let attendees = this.manageAttendeesService.getAttendeesForClass(fClass.id);
                     attendees.forEach( attendee => {
                         attendee.map(user => {
@@ -60,7 +61,7 @@ export class ManageAttendeesPage implements OnInit {
                 })
             });
             this.showDateRangeHeader = true;
-            this.toDate = (!this.toDate) ? DateUtils.getCurrentDate(0).toString(): this.toDate;
+            this.toDate = (!this.toDate) ? DateUtils.getCurrentDate(0).toString() : this.toDate;
 
         }).then(() => {
             loader.dismiss();

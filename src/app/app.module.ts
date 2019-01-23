@@ -30,6 +30,7 @@ import { ToastService, AuthService, LoadingService, AuthGuard, RoleGuard } from 
 import { FitnessClassPageModule } from './fitness-class/fitness-class.module';
 //import { FitnessClassesCalendarPageModule } from './fitness-classes-calendar/fitness-classes-calendar.module';
 import { LookupsPageModule } from './lookups/lookups.module';
+import { HomePageModule } from './home/home.module';
 //import { NgCalendarModule } from 'ionic2-calendar'; this needs to be replaced
 
 @NgModule({
@@ -38,17 +39,19 @@ import { LookupsPageModule } from './lookups/lookups.module';
         AccountPopOverComponent,
         FitnessClassMenuComponent
     ],
-    entryComponents: [],
+    entryComponents: [AccountPopOverComponent],
     imports: [
         BrowserModule,
         IonicModule.forRoot(),
         FitnessClassPageModule,
         //FitnessClassesCalendarPageModule,
         LookupsPageModule,
+        HomePageModule,
         AppRoutingModule,
         AngularFireModule.initializeApp(FIREBASE_CONFIG),
         AngularFireAuthModule,
-        AngularFirestoreModule.enablePersistence()],
+        AngularFirestoreModule //add in enablepersistence when we know how it works
+    ],
     providers: [
         StatusBar,
         SplashScreen,

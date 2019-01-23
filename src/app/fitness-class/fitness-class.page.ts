@@ -1,3 +1,4 @@
+import { firestore } from "firebase";
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController, AlertController } from '@ionic/angular';
@@ -7,6 +8,7 @@ import { FitnessClassModel } from '../models/export.models';
 import { Observable } from 'rxjs';
 import { AuthService, LoadingService } from '../app.services/export.app.servies';
 import { DateUtils } from '../shared/export.shared';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-fitness-class',
@@ -35,7 +37,7 @@ export class FitnessClassPage implements OnInit {
     ngOnInit() {
     }
 
-    //TODO:  THIS PAGE WILL BE REMOVED WHEN ALL OF THE FUNCTIONALITY HAS BEEN REMOVED
+    //TODO:  THIS PAGE WILL BE REMOVED WHEN ALL OF THE FUNCTIONALITY HAS BEEN REMOVED to the calendar
 
     async ionViewDidLoad() {
         this.isAdmin = this.authService.isAdmin();
@@ -84,7 +86,7 @@ export class FitnessClassPage implements OnInit {
     }
 
     openCopyModal(fitnessClass: FitnessClassModel){
-        fitnessClass.dateOfClass = DateUtils.getCurrentDate();
+        fitnessClass.dateOfClass = new firestore.Timestamp(moment(DateUtils.getCurrentDate()).valueOf(),0);
         fitnessClass.id = null;
         fitnessClass.cancelled = false;
         fitnessClass.hasRegistrations = false;

@@ -45,10 +45,10 @@
             <ion-col class="attendee-row" *ngFor="let attendee of item.listOfAttendees" size="12">
                 <ion-item>
                     <label class="display-name">{{ attendee.displayName }}</label>
-                    <ion-button slot='end' no-margin class="not-attending-confirmed" *ngIf="!attendee.attended">Did Not Attend</ion-button>
-                    <ion-button slot='end' no-margin class="not-attending-attended" *ngIf="!attendee.attended">Attended</ion-button>
-                    <ion-button slot='end' no-margin class="attending-not" *ngIf="attendee.attended">Did Not Attend</ion-button>
-                    <ion-button slot='end' no-margin class="attending-confirmed" *ngIf="attendee.attended">Attended</ion-button>
+                    <ion-button fill='clear' slot='end' class="not-attending-confirmed" *ngIf="!attendee.attended">Did Not Attend</ion-button>
+                    <ion-button fill='clear' slot='end' class="not-attending-attended" *ngIf="!attendee.attended">Attended</ion-button>
+                    <ion-button fill='clear' slot='end' class="attending-not" *ngIf="attendee.attended">Did Not Attend</ion-button>
+                    <ion-button fill='clear' slot='end' class="attending-confirmed" *ngIf="attendee.attended">Attended</ion-button>
                 </ion-item>
             </ion-col>
         </ion-row>

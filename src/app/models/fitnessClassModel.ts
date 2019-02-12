@@ -5,8 +5,8 @@ export interface FitnessClassData {
     cancelled: boolean;
     capacity: number;
     dateOfClass?: firestore.Timestamp;
-    startTime?: string | Date;
-    endTime?: string | Date;
+    startTime?: string;
+    endTime?: string;
     instructor?: string;
     location?: string;
     fitnessClassName: string;
@@ -15,5 +15,5 @@ export interface FitnessClassData {
 }
 
 export interface FitnessClassModel extends FitnessClassData {
-    id: string;
+    id?: string;
 }

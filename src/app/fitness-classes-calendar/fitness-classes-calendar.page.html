@@ -9,7 +9,10 @@
 </ion-header>
 
 <ion-content>
-    <ion-grid no-padding>
+    <div *ngIf="calendarOptions">
+        <ng-fullcalendar #ucCalendar [options]="calendarOptions" [(eventsModel)]="events"></ng-fullcalendar>
+    </div>
+    <!-- <ion-grid no-padding>
         <ion-row>
             <ion-col size="1">
                 <ion-button icon-only fill="clear" (click)="prevMonthClicked($event)">
@@ -40,10 +43,11 @@
                 </calendar>
             </ion-col>
         </ion-row>
-        <ng-template #CardTemplate let-showEventDetail="showEventDetail" let-selectedDate="selectedDate" let-noEventsLabel="noEventsLabel">
-            <ion-grid>
-                <ion-row [class]="selectedDate?.events.length > 0 ? 'row' : 'row noData' ">
-                    <ion-col *ngFor="let fitnessClass of selectedDate?.events" size="12" size-md="6" size-lg="6"><!-- add (click)=eventSelected(event) to have click event handlers -->
+        [class]="selectedDate?.events.length > 0 ? 'row' : 'row noData' " (click)=eventSelected(event)-->
+        <!-- <ng-template #CardTemplate let-showEventDetail="showEventDetail" let-selectedDate="selectedDate" let-noEventsLabel="noEventsLabel"> -->
+            <!-- <ion-grid>
+                <ion-row >
+                    <ion-col *ngFor="let fitnessClass of eventSource" size="12" size-md="6" size-lg="6" >
                         <ion-card text-wrap class="fitness-class-card">
                             <ion-card-header>
                                 <ion-list>
@@ -94,12 +98,12 @@
                         <h3>{{noEventsLabel}}</h3>
                     </ion-col>
                 </ion-row>
-            </ion-grid>
-        </ng-template>
-    </ion-grid>
+            </ion-grid> -->
+        <!-- </ng-template> -->
+    <!-- </ion-grid> -->
     <ion-fab slot="fixed" right vertical="bottom" *ngIf="isAdmin">
         <ion-fab-button mini (click)="openAddModal()" color='secondary'>
             <ion-icon name="md-add"></ion-icon>
         </ion-fab-button>
     </ion-fab>
-</ion-content>>
+</ion-content>

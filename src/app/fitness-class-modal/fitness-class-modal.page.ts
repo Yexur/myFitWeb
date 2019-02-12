@@ -3,10 +3,10 @@ import { ModalController, NavParams } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FitnessClassModel, LocationModel, InstructorModel, FitnessClassTemplateModel } from '../models/export.models';
 import { LoadingService } from '../app.services/export.app.servies';
-import { DateUtils } from '../shared/export.shared';
 import { FitnessClassService, LocationService, InstructorService, FitnessClassTemplateService } from '../api.services/export.api';
 import { Observable } from 'rxjs';
 import { DateOfFitnessClassValidator } from '../validators/dateOfClass';
+import { firestore } from "firebase";
 import * as moment from 'moment';
 
 @Component({
@@ -35,11 +35,7 @@ export class FitnessClassModalPage implements OnInit {
     )
     {
         this.fitnessClass = navParams.get('fitnessClass');
-
-        this.fitnessClassNameTitle = (this.fitnessClass.fitnessClassName
-            ? this.fitnessClass.fitnessClassName
-            : "Add New Fitness Class");
-
+        this.fitnessClassNameTitle = (this.fitnessClass.fitnessClassName !== '' ? this.fitnessClass.fitnessClassName : "Add New Fitness Class");
         this.fitnessClassForm = this.buildValidators();
     }
 
@@ -63,32 +59,43 @@ export class FitnessClassModalPage implements OnInit {
         if(this.fitnessClassForm.valid) {
             const loader = await this.loadingService.loader();
             await loader.present().then(() => {
-                let start = DateUtils.convertMomentToTimeString(moment(this.fitnessClassForm.controls.startTime.value));
-                let end = DateUtils.convertMomentToTimeString(moment(this.fitnessClassForm.controls.endTime.value));
+                // let start = DateUtils.convertMomentToTimeString(moment(this.fitnessClassForm.controls.startTime.value));
+                // let end = DateUtils.convertMomentToTimeString(moment(this.fitnessClassForm.controls.endTime.value));
 
                 this.fitnessClass.fitnessClassName =
                     this.fitnessClassForm.controls.fitnessClassName.value;
                 this.fitnessClass.instructor = this.fitnessClassForm.controls.instructor.value;
                 this.fitnessClass.location = this.fitnessClassForm.controls.location.value;
-                this.fitnessClass.dateOfClass =
-                    typeof this.fitnessClassForm.controls.dateOfClass.value === 'string' ?
-                    DateUtils.convertStringToDate(this.fitnessClassForm.controls.dateOfClass.value) :
-                    this.fitnessClassForm.controls.dateOfClass.value;
-                this.fitnessClass.startTime = DateUtils.convertStringToTime(start, true);
-                this.fitnessClass.endTime = DateUtils.convertStringToTime(end, true);
+                this.fitnessClass.dateOfClass = new firestore.Timestamp(moment(this.fitnessClassForm.controls.dateOfClass.value).milliseconds(),0);
+
+                // typeof this.fitnessClassForm.controls.dateOfClass.value === 'string' ?
+                // DateUtils.convertStringToDate(this.fitnessClassForm.controls.dateOfClass.value) :
+                // this.fitnessClassForm.controls.dateOfClass.value;
+                // this.fitnessClass.startTime = DateUtils.convertStringToTime(start, true);
+                // this.fitnessClass.endTime = DateUtils.convertStringToTime(end, true);
+
+                // this.fitnessClass.startTime =
+                //     this.createTimeStampForClassTime(this.fitnessClassForm.controls.dateOfClass.value,this.fitnessClassForm.controls.startTime.value);
+                // this.fitnessClass.endTime =
+                //     this.createTimeStampForClassTime(this.fitnessClassForm.controls.dateOfClass.value,this.fitnessClassForm.controls.endTime.value);
+
+                this.fitnessClass.startTime = this.fitnessClassForm.controls.startTime.value;
+                this.fitnessClass.endTime = this.fitnessClassForm.controls.endTime.value;
 
                 this.fitnessClass.capacity = this.fitnessClassForm.controls.capacity.value;
                 this.fitnessClass.description = this.fitnessClassForm.controls.description.value;
                 this.fitnessClassService.updateFitnessClass(this.fitnessClass);
-
-                this.fitnessClass.startTime = this.fitnessClassForm.controls.startTime.value;
-                this.fitnessClass.endTime = this.fitnessClassForm.controls.endTime.value;
 
                 this.modalCntr.dismiss(true);
                 loader.dismiss();
             });
         }
     }
+
+    // private createTimeStampForClassTime(fitnessClassDate: string, timePortion: string) {
+    //     return new firestore.Timestamp(moment(fitnessClassDate).milliseconds(), 0);
+    // }
+
 
     onFitnessClassTemplateChange(fitnessClassTemplate: FitnessClassTemplateModel){
         let template =

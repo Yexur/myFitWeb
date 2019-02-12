@@ -28,10 +28,9 @@ import {
 
 import { ToastService, AuthService, LoadingService, AuthGuard, RoleGuard } from "./app.services/export.app.servies";
 import { FitnessClassPageModule } from './fitness-class/fitness-class.module';
-//import { FitnessClassesCalendarPageModule } from './fitness-classes-calendar/fitness-classes-calendar.module';
+import { FitnessClassesCalendarPageModule } from './fitness-classes-calendar/fitness-classes-calendar.module';
 import { LookupsPageModule } from './lookups/lookups.module';
 import { HomePageModule } from './home/home.module';
-//import { NgCalendarModule } from 'ionic2-calendar'; this needs to be replaced
 
 @NgModule({
     declarations: [
@@ -43,14 +42,14 @@ import { HomePageModule } from './home/home.module';
     imports: [
         BrowserModule,
         IonicModule.forRoot(),
-        FitnessClassPageModule,
-        //FitnessClassesCalendarPageModule,
-        LookupsPageModule,
-        HomePageModule,
         AppRoutingModule,
         AngularFireModule.initializeApp(FIREBASE_CONFIG),
-        AngularFireAuthModule,
-        AngularFirestoreModule //add in enablepersistence when we know how it works
+        AngularFireAuthModule, //add in enablepersistence when we know how it works
+        AngularFirestoreModule,
+        FitnessClassPageModule,
+        FitnessClassesCalendarPageModule,
+        LookupsPageModule,
+        HomePageModule
     ],
     providers: [
         StatusBar,

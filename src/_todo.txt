@@ -1,6 +1,13 @@
-add the styling to the correct files and fix the elements
 test functionaity (db and work flow)
 fix errors
-fix circular references
 test the auth guard
 test the styling
+add a new calendar control
+
+fix the authnication
+fix the modals to load properly
+fix the navParams that are getting an undefined error.
+
+
+After all the basic stuff is done add capacitor
+After capacitor re-test

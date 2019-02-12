@@ -56,6 +56,8 @@ export class FitnessClassService {
         includeCancelled: boolean
     ): Observable<FitnessClassModel[]>
     {
+        console.log('start', fromDate);
+        console.log('end', toDate);
         let formatedFromDate = (!fromDate) ? DateUtils.getCurrentDate() : DateUtils.convertStringToDate(fromDate);
         let formatedToDate = (!toDate) ? DateUtils.getCurrentDate(23): DateUtils.convertStringToDate(toDate);
 
@@ -71,6 +73,9 @@ export class FitnessClassService {
                 .where("cancelled", "==", false)
                 .orderBy("dateOfClass", 'desc')
             );
+
+            console.log('formatedFromDate', formatedFromDate);
+            console.log('formatedToDate', formatedToDate);
         } else {
             fitnessClassCollection =
             this.database.collection(
@@ -81,7 +86,6 @@ export class FitnessClassService {
                 .orderBy("dateOfClass", 'desc')
             );
         }
-
         return this.getFitnessClasses(fitnessClassCollection);
     }
 
@@ -212,7 +216,6 @@ export class FitnessClassService {
         });
     }
 
-    //not working
     getFitnessClassRegistrationsByParams(
         fromDate: string,
         toDate: string
@@ -256,6 +259,9 @@ export class FitnessClassService {
         return collection.snapshotChanges().pipe(map(fClasses => {
             return fClasses.map(fClass => {
                 const data = fClass.payload.doc.data() as FitnessClassData;
+                console.log('data', data);
+                data.startTime = DateUtils.convertStringToTime(data.startTime.toString(), false);
+                data.endTime = DateUtils.convertStringToTime(data.endTime.toString(), false);
                 const id = fClass.payload.doc.id;
                 return {id, ...data};
             });

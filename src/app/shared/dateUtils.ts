@@ -1,6 +1,6 @@
 import * as moment from 'moment';
-import {Moment} from "moment";
-import { Timestamp } from 'rxjs/internal/operators/timestamp';
+import { Moment } from "moment";
+import { firestore } from "firebase";
 
 export module DateUtils {
     export function getCurrentDate(hours: number = 0): Date {
@@ -57,14 +57,18 @@ export module DateUtils {
         return (convertedHour + ':' + minute + timeConvention);
     }
 
-    export function addTimeStringToDate(date: Date, time: string | Date): Date {
-        let newDate = moment(date);
-        let newTime = typeof time === 'string' ? moment(time, 'HH:mm:ss A') : moment(time);
+    export function addTimeStringToDate(date: firestore.Timestamp, time: string): Date {
+        console.log('date', date);
 
+       // date.toDate().
+
+        let newDate = moment(date);
+        let newTime = moment(this.convertStringToTime(time), 'HH:mm:ss A');
+        console.log('newTime', newTime);
         newDate.hour(newTime.hour());
         newDate.minute(newTime.minute());
         newDate.second(newTime.second());
-
+        console.log('newDate.toDate()', moment(newDate).format("YYYY/MMM/DD HH:mm:ss A"));
         return newDate.toDate();
     }
 }

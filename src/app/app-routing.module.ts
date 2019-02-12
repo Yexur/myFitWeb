@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard, RoleGuard } from './app.services/export.app.servies';
 import { FitnessClassPage } from './fitness-class/fitness-class.page';
-//import { FitnessClassesCalendarPage } from './fitness-classes-calendar/fitness-classes-calendar.page';
+import { FitnessClassesCalendarPage } from './fitness-classes-calendar/fitness-classes-calendar.page';
 import { LookupsPage } from './lookups/lookups.page';
 import { HomePage } from './home/home.page';
 
@@ -46,16 +46,16 @@ const routes: Routes = [
             }
         ]
     },
-    // { path: 'fitness-classes-calendar',
-    //     component: FitnessClassesCalendarPage,
-    //     canActivate: [AuthGuard],
-    //     children: [
-    //         { path: 'fitness-class-modal',
-    //             loadChildren: './fitness-class-modal/fitness-class-modal.module#FitnessClassModalPageModule',
-    //             canActivate: [RoleGuard]
-    //         }
-    //     ]
-    // },
+    { path: 'fitness-classes-calendar',
+        component: FitnessClassesCalendarPage,
+        canActivate: [AuthGuard],
+        children: [
+            { path: 'fitness-class-modal',
+                loadChildren: './fitness-class-modal/fitness-class-modal.module#FitnessClassModalPageModule',
+                canActivate: [RoleGuard]
+            }
+        ]
+    },
     { path: 'lookups',
         component: LookupsPage,
         canActivate: [RoleGuard],
